@@ -1,0 +1,3 @@
+function alertDavid() {
+    alert('David');
+}

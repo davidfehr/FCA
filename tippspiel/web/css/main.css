@@ -1,0 +1,41 @@
+body{
+    background-color: #E8E8E8;
+    color: #000000;
+    font-size: 14px;
+    padding-top: 50px;
+}
+
+.container{
+    background-color: white;
+    &.header {
+        background-color: red;    
+    }
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+	font-family: Oswald, sans-serif;
+	font-size: 48px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 60px;
+        color: #323296;
+        text-transform: uppercase;
+}
+
+h2 {
+	font-family: Oswald, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 30px;
+        color: #323296;
+}
+
+.row {
+    
+}
