@@ -11,8 +11,15 @@ use AppBundle\Entity\Bet;
 
 class DefaultController extends Controller {
 
+     /**
+     * @Route("/", name="homepage")
+     */
+    public function indexAction(Request $request) {
+        return $this->redirectToRoute('user');
+    }
+    
     /**
-     * @Route("/user")
+     * @Route("/user", name="user")
      */
     public function userAction(Request $request) {
         $post = Request::createFromGlobals();
@@ -99,38 +106,6 @@ class DefaultController extends Controller {
         }
     }
 
-    private function renderBet($name) {
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Game');
-        $games = $repository->findAll();
-
-        $leagueRepo = $this->getDoctrine()->getRepository('AppBundle:League');
-        $national = $leagueRepo->findOneBy(array('name' => 'Nationalmannschaft'));
-        $bundesliga = $leagueRepo->findOneBy(array('name' => '1.Bundesliga'));        
-        $kreisliga = $leagueRepo->findOneBy(array('name' => 'Kreisliga I'));
-        $aklasse = $leagueRepo->findOneBy(array('name' => 'A-Klasse I'));
-
-        $gameRepo = $this->getDoctrine()->getRepository('AppBundle:Game');
-        $bayernGames = $gameRepo->findBy(array('league' => $bundesliga));
-        $natiGames = $gameRepo->findBy(array('league' => $national));
-        $aichIGames = $gameRepo->findBy(array('league' => $kreisliga));
-        $aichIIGames = $gameRepo->findBy(array('league' => $aklasse));
-
-        return $this->render('default/bet.html.twig', array(
-                    'name' => $name,
-                    'games' => $games,
-                    'bayernGames' => $bayernGames,
-                    'natiGames' => $natiGames,
-                    'aichIGames' => $aichIGames,
-                    'aichIIGames' => $aichIIGames,
-        ));
-    }
-
-    private function renderFinish($name) {
-        return $this->render('default/finish.html.twig', array(
-                    'name' => $name
-        ));
-    }
-
     /**
      * @Route("/bet", name="bet")
      */
@@ -155,7 +130,7 @@ class DefaultController extends Controller {
                 $bet->setHomeTeamScore($homeTeamScore);
                 $bet->setGuestTeamScore($guestTeamScore);
                 $bet->setGameId($gameId);
-                $bet->setUserId(1);
+                $bet->setUserId($userId);
 
                 $em->persist($bet);
             }
@@ -166,5 +141,41 @@ class DefaultController extends Controller {
             return $this->renderBet($name);
         }
     }
+    
+    private function renderBet($name) {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Game');
+        $games = $repository->findAll();
+
+        $leagueRepo = $this->getDoctrine()->getRepository('AppBundle:League');
+        $national = $leagueRepo->findOneBy(array('name' => 'Nationalmannschaft'));
+        $bundesliga = $leagueRepo->findOneBy(array('name' => '1.Bundesliga'));        
+        $bundesliga2 = $leagueRepo->findOneBy(array('name' => '2.Bundesliga'));
+        $kreisliga = $leagueRepo->findOneBy(array('name' => 'Kreisliga I'));
+        $aklasse = $leagueRepo->findOneBy(array('name' => 'A-Klasse I'));
+
+        $gameRepo = $this->getDoctrine()->getRepository('AppBundle:Game');
+        $bayernGames = $gameRepo->findBy(array('league' => $bundesliga));
+        $sechzigGames = $gameRepo->findBy(array('league' => $bundesliga2));
+        $natiGames = $gameRepo->findBy(array('league' => $national));
+        $aichIGames = $gameRepo->findBy(array('league' => $kreisliga));
+        $aichIIGames = $gameRepo->findBy(array('league' => $aklasse));
+
+        return $this->render('default/bet.html.twig', array(
+                    'name' => $name,
+                    'games' => $games,
+                    'bayernGames' => $bayernGames,
+                    'sechzigGames' => $sechzigGames,
+                    'natiGames' => $natiGames,
+                    'aichIGames' => $aichIGames,
+                    'aichIIGames' => $aichIIGames,
+        ));
+    }
+    
+    private function renderFinish($name) {
+        return $this->render('default/finish.html.twig', array(
+                    'name' => $name
+        ));
+    }    
+    
 
 }

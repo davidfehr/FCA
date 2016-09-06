@@ -11,23 +11,27 @@
 
                 <fieldset>
                     <h4>Wie schlägt sich der Weltmeister</h4>
+                    <p style="font-size:10px;">(richtiges Ergebnis = 5 Punkte / richtige Tendenz = 2 Punkte)</p>
                     {% for game in natiGames %}
                         <div class="row">
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.hometeam.name|e }}<p>
-                                </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control custom" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
-                                </div>
-                                <div class="col-xs-12 col-md-1 text-center"> : </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
-                                </div>     
-                                <div class="col-xs-12 col-md-1"></div>
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.guestteam.name|e }} <p>
-                                </div>                            
-                                
+                            <span style="color: #000000;font-size: 10px;">{{ game.matchDate|date('Y-m-d') }}</span>
+                        </div>                                                
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.hometeam.name|e }}<p>
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control custom" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
+                            </div>
+                            <div class="col-xs-12 col-md-1 text-center"> : </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
+                            </div>     
+                            <div class="col-xs-12 col-md-1"></div>
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.guestteam.name|e }} <p>
+                            </div>                            
+
                             <input type="hidden" name="gameId{{ game.id|e }}" id="inputQuestionId" value="{{ game.id|e }}">
                         </div>
                         <hr>
@@ -37,26 +41,30 @@
                         <button type="button" class="btn btn-next">Weiter</button>
                     </div>                    
                 </fieldset> 
-                    
+
                 <fieldset>
                     <h4>Durchmarsch der Bayern</h4>
+                    <p style="font-size:10px;">(richtiges Ergebnis = 5 Punkte / richtige Tendenz = 2 Punkte)</p>
                     {% for game in bayernGames %}
                         <div class="row">
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.hometeam.name|e }}<p>
-                                </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
-                                </div>
-                                <div class="col-xs-12 col-md-1 text-center"> : </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
-                                </div>     
-                                <div class="col-xs-12 col-md-1"></div>
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.guestteam.name|e }} <p>
-                                </div>                            
-                                
+                            <span style="color: #000000;font-size: 10px;">{{ game.matchDay }}. Spieltag</span>
+                        </div>                                                
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.hometeam.name|e }}<p>
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
+                            </div>
+                            <div class="col-xs-12 col-md-1 text-center"> : </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
+                            </div>     
+                            <div class="col-xs-12 col-md-1"></div>
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.guestteam.name|e }} <p>
+                            </div>                            
+
                             <input type="hidden" name="gameId{{ game.id|e }}" id="inputQuestionId" value="{{ game.id|e }}">
                         </div>
                         <hr>
@@ -68,24 +76,61 @@
                 </fieldset>  
 
                 <fieldset>
+                    <h4>Auch Minderheiten wollen berücksichtigt werden</h4>
+                    <p style="font-size:10px;">(richtiges Ergebnis = 5 Punkte / richtige Tendenz = 2 Punkte)</p>
+                    {% for game in sechzigGames %}
+                        <div class="row">
+                            <span style="color: #000000;font-size: 10px;">{{ game.matchDay }}. Spieltag</span>
+                        </div>                        
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.hometeam.name|e }}<p>
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
+                            </div>
+                            <div class="col-xs-12 col-md-1 text-center"> : </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
+                            </div>     
+                            <div class="col-xs-12 col-md-1"></div>
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.guestteam.name|e }} <p>
+                            </div>                            
+
+                            <input type="hidden" name="gameId{{ game.id|e }}" id="inputQuestionId" value="{{ game.id|e }}">
+                        </div>
+                        <hr>
+                    {% endfor %}  
+                    <div class="f1-buttons">
+                        <button type="button" class="btn btn-previous">Zurück</button>
+                        <button type="button" class="btn btn-next">Weiter</button>
+                    </div>                    
+                </fieldset>                    
+
+                <fieldset>
                     <h4>Wird der Aicher Sportpark zur Festung?</h4>
+                    <p style="font-size:10px;">(richtiges Ergebnis = 5 Punkte / richtige Tendenz = 2 Punkte)</p>
                     {% for game in aichIGames %}
                         <div class="row">
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.hometeam.name|e }}<p>
-                                </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
-                                </div>
-                                <div class="col-xs-12 col-md-1 text-center"> : </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
-                                </div>     
-                                <div class="col-xs-12 col-md-1"></div>
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.guestteam.name|e }} <p>
-                                </div>                            
-                                
+                            <span style="color: #000000;font-size: 10px;">{{ game.matchDate|date('Y-m-d') }}</span>
+                        </div>                        
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.hometeam.name|e }}<p>
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
+                            </div>
+                            <div class="col-xs-12 col-md-1 text-center"> : </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
+                            </div>     
+                            <div class="col-xs-12 col-md-1"></div>
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.guestteam.name|e }} <p>
+                            </div>                            
+
                             <input type="hidden" name="gameId{{ game.id|e }}" id="inputQuestionId" value="{{ game.id|e }}">
                         </div>
                         <hr>
@@ -95,26 +140,30 @@
                         <button type="button" class="btn btn-next">Weiter</button>
                     </div>                    
                 </fieldset> 
-                    
+
                 <fieldset>
                     <h4>Heimspiele der Oacher Zwoaten</h4>
+                    <p style="font-size:10px;">(richtiges Ergebnis = 5 Punkte / richtige Tendenz = 2 Punkte)</p>
                     {% for game in aichIIGames %}
                         <div class="row">
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.hometeam.name|e }}<p>
-                                </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
-                                </div>
-                                <div class="col-xs-12 col-md-1 text-center"> : </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
-                                </div>     
-                                <div class="col-xs-12 col-md-1"></div>
-                                <div class="col-xs-12 col-md-4">
-                                    <p>{{ game.guestteam.name|e }} <p>
-                                </div>                            
-                                
+                            <span style="color: #000000;font-size: 10px;">{{ game.matchDate|date('Y-m-d') }}</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.hometeam.name|e }}<p>
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betHometeamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">
+                            </div>
+                            <div class="col-xs-12 col-md-1 text-center"> : </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" name="betGuestteamScore{{ game.id|e }}" class="form-control" maxlength="2" id="exampleInputGame{{ game.id|e }}" placeholder="Tore">                    
+                            </div>     
+                            <div class="col-xs-12 col-md-1"></div>
+                            <div class="col-xs-12 col-md-4">
+                                <p>{{ game.guestteam.name|e }} <p>
+                            </div>                            
+
                             <input type="hidden" name="gameId{{ game.id|e }}" id="inputQuestionId" value="{{ game.id|e }}">
                         </div>
                         <hr>

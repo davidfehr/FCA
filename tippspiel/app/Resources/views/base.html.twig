@@ -29,6 +29,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <a href="{{ path('homepage') }}">
+                            <img src="{{ asset('logo.png') }}" width="100px">
+                        </a>
+                    </div>
+                </div>                
 
                 {% if app.session.flashBag.has('success') %}
                     <div class="alert alert-success">

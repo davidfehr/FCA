@@ -7,54 +7,17 @@
             <form role="form" action="user" method="post" class="f1">
                 <input type="hidden" name="questionInitalIndex" id="inputQuestionInitalIndex" value="{{ questions[0].id|e }}">
                 <input type="hidden" name="questionCount" id="inputQuestionCount" value="{{ questions|length }}">
-                <div class="f1-steps">
-                    <div class="f1-progress">
-                        <div class="f1-progress-line" data-now-value="8" data-number-of-steps="11" style="width: 8%;"></div>
-                    </div>
-                    <div class="f1-step active">
-                        <div class="f1-step-icon"><i class="fa fa-user"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-key"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                    <div class="f1-step">
-                        <div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
-                    </div>
-                </div>                
-
+                
                 <fieldset>
                     <h4>Wer will nächster Aicher Tippchampion werden?</h4>
+                    <p style="font-size:10px;">Einsatz 10 Euro / Abgabeschluss 10.09.16 vor dem Spiel</p>
                     <div class="form-group">
                         <label class="sr-only" for="f1-first-name">Name</label>
                         <input type="text" name="name" placeholder="Name..." class="f1-first-name form-control" id="f1-first-name">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="f1-email">E-Mail</label>
-                        <input type="text" name="email" placeholder="E-Mail..." class="f1-email form-control" id="f1-email">
+                        <input type="email" name="email" placeholder="E-Mail..." class="f1-email form-control" id="f1-email">
                     </div>
                     <div class="f1-buttons">
                         <button type="button" class="btn btn-next">Weiter</button>
@@ -63,6 +26,8 @@
 
                 <fieldset>
                     <h4>Los gehts es mit ein paar offenen Fragen:</h4>
+                    <p style="font-size:10px;">(richtiger Tipp = 5 Punkte)</p>
+                    
                     {% for question in openQuestions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -78,6 +43,7 @@
 
                 <fieldset>
                     <h4>Beckenbauer, Löw oder Guardiola?</h4>
+                    <p style="font-size:10px;">(Erfolgt der erste Trainerwechsel vor Abgabeschluss, entfällt dieser Tipp)<br>(richtiger Tipp = 5 Punkte)</p>
                     {% for question in coachQuestions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -96,6 +62,7 @@
                     </div>                    
                 </fieldset>                    
 
+                <!--
                 <fieldset>
                     <h4>Werder Bremen sicher nicht!</h4>
                     {% for question in selectBuli1Questions %}
@@ -115,9 +82,11 @@
                         <button type="button" class="btn btn-next">Weiter</button>
                     </div>                    
                 </fieldset>  
+                -->
 
                 <fieldset>
                     <h4>Und immer, immer wieder...</h4>
+                    <p style="font-size:10px;">(richtiger Meistertipp = 10 Punkte)</p>
                     {% for question in selectKreisligaQuestions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -138,6 +107,7 @@
 
                 <fieldset>
                     <h4>Angekommen in der Buchstabenliga</h4>
+                    <p style="font-size:10px;">(richtiger Meistertipp = 10 Punkte)</p>
                     {% for question in selectAklasseQuestions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -158,6 +128,7 @@
 
                 <fieldset>
                     <h4>Oacher Platzierung</h4>
+                    <p style="font-size:10px;">(richtiger Tipp = 5 Punkte; je Platz daneben = -1 Punkt)</p>
                     {% for question in placementAichQuestions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -178,6 +149,7 @@
 
                 <fieldset>
                     <h4>Endplatzierung 1.Bundesliga</h4>
+                    <p style="font-size:10px;">(richtiger Platz = 6 Punkte; richtiger Verein = 3 Punkte)</p>
                     {% for question in placementBuli1Questions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -198,6 +170,7 @@
 
                 <fieldset>
                     <h4>Endplatzierung 2.Bundesliga</h4>
+                    <p style="font-size:10px;">(richtiger Platz = 6 Punkte; richtiger Verein = 3 Punkte)</p>
                     {% for question in placementBuli2Questions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -218,6 +191,7 @@
 
                 <fieldset>
                     <h4>Wie weit kommen die deutschen Mannschaften im Europapokal?</h4>
+                    <p style="font-size:10px;">(richtiger Tipp = 5 Punkte; je Runde daneben = -2 Punkte)</p>
                     {% for question in roundQuestions %}
                         <div class="form-group">
                             <label for="exampleInputQuestion{{ question.id|e }}">{{ question.question|e }}</label>
@@ -240,7 +214,7 @@
                     <h4>Letzte Chance nochmal deine Antworten zu überprüfen</h4>
                     <div class="f1-buttons">
                         <button type="button" class="btn btn-previous">zurück</button>
-                        <button type="submit" name="submit" class="btn btn-submit">Tipp abgeben</button>
+                        <button type="submit" name="submit" class="btn btn-submit">Weiter zu den Ergebnistipps</button>
                     </div>
                 </fieldset>
             </form>

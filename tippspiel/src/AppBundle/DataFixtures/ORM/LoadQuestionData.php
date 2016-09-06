@@ -18,11 +18,6 @@ class LoadQuestionData extends AbstractFixture implements OrderedFixtureInterfac
     public function load(ObjectManager $manager) {
         
         $question = new Question();
-        $question->setQuestion('Wer wird Deutscher Meister?');
-        $question->setType($this->getReference('select_buli'));
-        $manager->persist($question); 
-        
-        $question = new Question();
         $question->setQuestion('Wer wird Pokalsieger?');
         $question->setType($this->getReference('open'));
         $manager->persist($question);         
