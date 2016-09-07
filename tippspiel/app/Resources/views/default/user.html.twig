@@ -23,7 +23,7 @@
                         <button type="button" class="btn btn-next">Weiter</button>
                     </div>
                 </fieldset>
-
+                
                 <fieldset>
                     <h4>Los gehts es mit ein paar offenen Fragen:</h4>
                     <p style="font-size:10px;">(richtiger Tipp = 5 Punkte)</p>
@@ -50,7 +50,7 @@
                             <select class="form-control" name="answer{{ question.id|e }}">
                                 <option>Bitte auswählen</option>
                                 {% for answer in question.possibleAnswers %}
-                                    <option value="{{ answer.id|e }}">{{ answer.answer|e }}</option>
+                                    <option value="{{ answer.answer|e }}">{{ answer.answer|e }}</option>
                                 {% endfor %}           
                             </select> 
                             <input type="hidden" name="questionId{{ question.id|e }}" id="inputQuestionId" value="{{ question.id|e }}">
@@ -62,7 +62,7 @@
                     </div>                    
                 </fieldset>                    
 
-                <!--
+                   <!--  
                 <fieldset>
                     <h4>Werder Bremen sicher nicht!</h4>
                     {% for question in selectBuli1Questions %}
@@ -71,7 +71,7 @@
                             <select class="form-control" name="answer{{ question.id|e }}">
                                 <option>Bitte auswählen</option>
                                 {% for team in buliTeams %}
-                                    <option value="{{ team.id|e }}">{{ team.name|e }}</option>
+                                    <option value="{{ team.name|e }}">{{ team.name|e }}</option>
                                 {% endfor %}           
                             </select> 
                             <input type="hidden" name="questionId{{ question.id|e }}" id="inputQuestionId" value="{{ question.id|e }}">
@@ -82,7 +82,7 @@
                         <button type="button" class="btn btn-next">Weiter</button>
                     </div>                    
                 </fieldset>  
-                -->
+               -->
 
                 <fieldset>
                     <h4>Und immer, immer wieder...</h4>
@@ -93,7 +93,7 @@
                             <select class="form-control" name="answer{{ question.id|e }}">
                                 <option>Bitte auswählen</option>
                                 {% for team in kreisligaTeams %}
-                                    <option value="{{ team.id|e }}">{{ team.name|e }}</option>
+                                    <option value="{{ team.name|e }}">{{ team.name|e }}</option>
                                 {% endfor %}           
                             </select> 
                             <input type="hidden" name="questionId{{ question.id|e }}" id="inputQuestionId" value="{{ question.id|e }}">
@@ -114,7 +114,7 @@
                             <select class="form-control" name="answer{{ question.id|e }}">
                                 <option>Bitte auswählen</option>
                                 {% for team in aklassenTeams %}
-                                    <option value="{{ team.id|e }}">{{ team.name|e }}</option>
+                                    <option value="{{ team.name|e }}">{{ team.name|e }}</option>
                                 {% endfor %}           
                             </select> 
                             <input type="hidden" name="questionId{{ question.id|e }}" id="inputQuestionId" value="{{ question.id|e }}">
@@ -156,7 +156,7 @@
                             <select class="form-control" name="answer{{ question.id|e }}">
                                 <option>Bitte auswählen</option>
                                 {% for team in buliTeams %}
-                                    <option value="{{ team.id|e }}">{{ team.name|e }}</option>
+                                    <option value="{{ team.name|e }}">{{ team.name|e }}</option>
                                 {% endfor %}         
                             </select>                                      
                             <input type="hidden" name="questionId{{ question.id|e }}" id="inputQuestionId" value="{{ question.id|e }}">
@@ -177,7 +177,7 @@
                             <select class="form-control" name="answer{{ question.id }}">
                                 <option>Bitte auswählen</option>
                                 {% for team in buli2Teams %}
-                                    <option value="{{ team.id|e }}">{{ team.name|e }}</option>
+                                    <option value="{{ team.name|e }}">{{ team.name|e }}</option>
                                 {% endfor %}           
                             </select>                                     
                             <input type="hidden" name="questionId{{ question.id|e }}" id="inputQuestionId" value="{{ question.id|e }}">
@@ -198,7 +198,7 @@
                             <select class="form-control" name="answer{{ question.id }}">
                                 <option>Bitte auswählen</option>
                                 {% for round in rounds %}
-                                    <option value="{{ round.id|e }}">{{ round.name|e }}</option>
+                                    <option value="{{ round.name|e }}">{{ round.name|e }}</option>
                                 {% endfor %}           
                             </select>                                     
                             <input type="hidden" name="questionId{{ question.id|e }}" id="inputQuestionId" value="{{ question.id|e }}">
@@ -209,7 +209,7 @@
                         <button type="button" class="btn btn-next">Weiter</button>
                     </div>                    
                 </fieldset>                      
-
+ 
                 <fieldset>
                     <h4>Letzte Chance nochmal deine Antworten zu überprüfen</h4>
                     <div class="f1-buttons">

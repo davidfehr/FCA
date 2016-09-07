@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <p>Bisher haben folgende Tipper mitgemacht:</p>
+            
+                {% for user in users %}
+                  <p>  {{ user.name }} mit {{ user.email }}</p>
+                {% endfor %} 
+            
+            
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <form role="form" action="info" method="post" class="f1">
+                
+                <fieldset>
+                    <h4>Wessen Tipp willst du einsehen?</h4>
+                    <p style="font-size:10px;">Einfach E-Mail des Tippers Adresse eingeben</p>
+                    <div class="form-group">
+                        <label class="sr-only" for="f1-email">E-Mail</label>
+                        <input type="email" name="email" placeholder="E-Mail..." class="f1-email form-control" id="f1-email">
+                    </div>
+                    <div class="f1-buttons">
+                        <button type="button" class="btn btn-previous">zurück</button>
+                        <button type="submit" name="submit" class="btn btn-submit">Zeige mir die Details</button>
+                    </div>
+                </fieldset>
+                    
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

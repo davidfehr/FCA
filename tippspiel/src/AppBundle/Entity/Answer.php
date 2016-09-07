@@ -22,18 +22,15 @@ class Answer
     private $id;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
      */
-    private $userId;
+    private $user;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="question_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Question")
      */
-    private $questionId;
+    private $question;
 
     /**
      * @var string
@@ -54,51 +51,51 @@ class Answer
     }
 
     /**
-     * Set userId
+     * Set user
      *
-     * @param integer $userId
+     * @param $user
      *
      * @return Answer
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get user
      *
-     * @return int
+     * @return User
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
-     * Set questionId
+     * Set question
      *
-     * @param integer $questionId
+     * @param Question $question
      *
      * @return Answer
      */
-    public function setQuestionId($questionId)
+    public function setQuestion($question)
     {
-        $this->questionId = $questionId;
+        $this->question = $question;
 
         return $this;
     }
 
     /**
-     * Get questionId
+     * Get question
      *
-     * @return int
+     * @return Question
      */
-    public function getQuestionId()
+    public function getQuestion()
     {
-        return $this->questionId;
+        return $this->question;
     }
 
     /**

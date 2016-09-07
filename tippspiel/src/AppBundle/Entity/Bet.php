@@ -22,18 +22,18 @@ class Bet
     private $id;
 
     /**
-     * @var int
+     * @var User
      *
-     * @ORM\Column(name="userId", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
      */
-    private $userId;
+    private $user;
 
     /**
-     * @var int
+     * @var Game
      *
-     * @ORM\Column(name="gameId", type="integer")
+     * @ORM\ManyToOne(targetEntity="Game")
      */
-    private $gameId;
+    private $game;
 
     /**
      * @var int
@@ -61,51 +61,51 @@ class Bet
     }
 
     /**
-     * Set userId
+     * Set user
      *
-     * @param integer $userId
+     * @param User $user
      *
      * @return Bet
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get user
      *
-     * @return int
+     * @return User
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
-     * Set gameId
+     * Set game
      *
-     * @param integer $gameId
+     * @param Game $game
      *
      * @return Bet
      */
-    public function setGameId($gameId)
+    public function setGame($game)
     {
-        $this->gameId = $gameId;
+        $this->game = $game;
 
         return $this;
     }
 
     /**
-     * Get gameId
+     * Get game
      *
-     * @return int
+     * @return Game
      */
-    public function getGameId()
+    public function getGame()
     {
-        return $this->gameId;
+        return $this->game;
     }
 
     /**

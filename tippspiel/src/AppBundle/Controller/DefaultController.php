@@ -11,13 +11,64 @@ use AppBundle\Entity\Bet;
 
 class DefaultController extends Controller {
 
-     /**
+    /**
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request) {
         return $this->redirectToRoute('user');
     }
-    
+
+    /**
+     * @Route("/info", name="info")
+     */
+    public function infoAction(Request $request) {
+        $post = Request::createFromGlobals();
+        if ($post->request->has('submit')) {
+            $email = $post->request->get('email');
+            
+            $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+            $user = $usersRepo->findOneBy(array('email' => $email));            
+            
+            $answerRepository = $this->getDoctrine()->getRepository('AppBundle:Answer');
+            $answers = $answerRepository->findBy(array('user' => $user));
+            
+            $betRepository = $this->getDoctrine()->getRepository('AppBundle:Bet');
+            $bets = $betRepository->findBy(array('user' => $user));            
+            
+            return $this->render('default/detail.html.twig', array(
+                'user' => $user,
+                'answers' => $answers,
+                'bets' => $bets
+            ));
+        } else {
+
+            $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+            $users = $usersRepo->findAll();
+
+            return $this->render('default/info.html.twig', array(
+                        'users' => $users
+            ));
+        }
+    }
+
+    /**
+     * @Route("/detail", name="detail")
+     */
+    public function detailAction(Request $request) {
+        $post = Request::createFromGlobals();
+        if ($post->request->has('submit')) {
+            $email = $post->request->get('email');
+        } else {
+
+            $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+            $users = $usersRepo->findAll();
+
+            return $this->render('default/info.html.twig', array(
+                        'users' => $users
+            ));
+        }
+    }
+
     /**
      * @Route("/user", name="user")
      */
@@ -42,15 +93,18 @@ class DefaultController extends Controller {
 
             $initalQuestionIndex = $post->request->get('questionInitalIndex');
             $questionCount = $post->request->get('questionCount');
-
+            
+            $questionRepository = $this->getDoctrine()->getRepository('AppBundle:Question');
+            
             for ($initalQuestionIndex; $initalQuestionIndex <= $questionCount; $initalQuestionIndex++) {
                 $answerText = $post->request->get('answer' . $initalQuestionIndex);
                 $questionId = $post->request->get('questionId' . $initalQuestionIndex);
-
+                $question = $questionRepository->findOneById($questionId);
+                
                 $answer = new Answer();
                 $answer->setAnswer($answerText);
-                $answer->setQuestionId($questionId);
-                $answer->setUserId($user->getId());
+                $answer->setQuestion($question);
+                $answer->setUser($user);
 
                 $em->persist($answer);
             }
@@ -118,19 +172,24 @@ class DefaultController extends Controller {
             $userId = $session->get('userId');
             $em = $this->getDoctrine()->getManager();
 
+            $gameRepository = $this->getDoctrine()->getRepository('AppBundle:Game');
+            $repository = $this->getDoctrine()->getRepository('AppBundle:User');
+            $user = $repository->findOneById($userId);
+            
             $initalGameIndex = $post->request->get('gameInitalIndex');
             $gameCount = $post->request->get('gameCount');
 
             for ($initalGameIndex; $initalGameIndex <= $gameCount; $initalGameIndex++) {
                 $gameId = $post->request->get('gameId' . $initalGameIndex);
+                $game = $gameRepository->findOneById($gameId);
                 $homeTeamScore = $post->request->get('betHometeamScore' . $initalGameIndex);
                 $guestTeamScore = $post->request->get('betGuestteamScore' . $initalGameIndex);
 
                 $bet = new Bet();
                 $bet->setHomeTeamScore($homeTeamScore);
                 $bet->setGuestTeamScore($guestTeamScore);
-                $bet->setGameId($gameId);
-                $bet->setUserId($userId);
+                $bet->setGame($game);
+                $bet->setUser($user);
 
                 $em->persist($bet);
             }
@@ -141,14 +200,14 @@ class DefaultController extends Controller {
             return $this->renderBet($name);
         }
     }
-    
+
     private function renderBet($name) {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Game');
         $games = $repository->findAll();
 
         $leagueRepo = $this->getDoctrine()->getRepository('AppBundle:League');
         $national = $leagueRepo->findOneBy(array('name' => 'Nationalmannschaft'));
-        $bundesliga = $leagueRepo->findOneBy(array('name' => '1.Bundesliga'));        
+        $bundesliga = $leagueRepo->findOneBy(array('name' => '1.Bundesliga'));
         $bundesliga2 = $leagueRepo->findOneBy(array('name' => '2.Bundesliga'));
         $kreisliga = $leagueRepo->findOneBy(array('name' => 'Kreisliga I'));
         $aklasse = $leagueRepo->findOneBy(array('name' => 'A-Klasse I'));
@@ -170,12 +229,11 @@ class DefaultController extends Controller {
                     'aichIIGames' => $aichIIGames,
         ));
     }
-    
+
     private function renderFinish($name) {
         return $this->render('default/finish.html.twig', array(
                     'name' => $name
         ));
-    }    
-    
+    }
 
 }
