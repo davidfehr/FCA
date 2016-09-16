@@ -7,7 +7,7 @@
             <p>Bisher haben folgende Tipper mitgemacht:</p>
             
                 {% for user in users %}
-                  <p>  {{ user.name }} mit {{ user.email }}</p>
+                  <p>  {{ user.name }} </p>
                 {% endfor %} 
             
             
@@ -20,10 +20,10 @@
                 
                 <fieldset>
                     <h4>Wessen Tipp willst du einsehen?</h4>
-                    <p style="font-size:10px;">Einfach E-Mail des Tippers Adresse eingeben</p>
+                    <p style="font-size:10px;">Einfach Name des Tippers Adresse eingeben</p>
                     <div class="form-group">
-                        <label class="sr-only" for="f1-email">E-Mail</label>
-                        <input type="email" name="email" placeholder="E-Mail..." class="f1-email form-control" id="f1-email">
+                        <label class="sr-only" for="f1-name">Name</label>
+                        <input type="name" name="name" placeholder="Name..." class="f1-email form-control" id="f1-name">
                     </div>
                     <div class="f1-buttons">
                         <button type="button" class="btn btn-previous">zurück</button>

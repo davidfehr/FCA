@@ -24,10 +24,10 @@ class DefaultController extends Controller {
     public function infoAction(Request $request) {
         $post = Request::createFromGlobals();
         if ($post->request->has('submit')) {
-            $email = $post->request->get('email');
+            $name = $post->request->get('name');
             
             $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $user = $usersRepo->findOneBy(array('email' => $email));            
+            $user = $usersRepo->findOneBy(array('name' => $name, 'complete' => 1));            
             
             $answerRepository = $this->getDoctrine()->getRepository('AppBundle:Answer');
             $answers = $answerRepository->findBy(array('user' => $user));
@@ -41,9 +41,8 @@ class DefaultController extends Controller {
                 'bets' => $bets
             ));
         } else {
-
             $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $users = $usersRepo->findAll();
+            $users = $usersRepo->findBy(array('complete' => 1));
 
             return $this->render('default/info.html.twig', array(
                         'users' => $users
@@ -57,11 +56,10 @@ class DefaultController extends Controller {
     public function detailAction(Request $request) {
         $post = Request::createFromGlobals();
         if ($post->request->has('submit')) {
-            $email = $post->request->get('email');
+            $name = $post->request->get('name');
         } else {
-
             $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $users = $usersRepo->findAll();
+            $users = $usersRepo->findBy(array('complete' => 1));
 
             return $this->render('default/info.html.twig', array(
                         'users' => $users
@@ -84,6 +82,7 @@ class DefaultController extends Controller {
             $user = new User();
             $user->setName($name);
             $user->setEmail($email);
+            $user->setComplete(0);
             $em->persist($user);
             $em->flush();
 
@@ -193,6 +192,8 @@ class DefaultController extends Controller {
 
                 $em->persist($bet);
             }
+            
+            $user->setComplete(true);
             $em->flush();
 
             return $this->renderFinish($name);

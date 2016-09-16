@@ -35,7 +35,14 @@ class User
      */
     private $email;
 
-
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="complete", type="boolean", options={"default"=false})
+     */
+    private $complete;
+    
+    
     /**
      * Get id
      *
@@ -93,5 +100,14 @@ class User
     {
         return $this->email;
     }
+    
+    function isComplete() {
+        return $this->complete;
+    }
+
+    function setComplete($complete) {
+        $this->complete = $complete;
+    }
+
 }
 
