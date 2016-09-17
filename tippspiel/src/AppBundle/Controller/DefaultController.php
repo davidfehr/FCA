@@ -19,35 +19,40 @@ class DefaultController extends Controller {
     }
 
     /**
+     * @Route("/search", name="search")
+     */
+    public function searchAction(Request $request) {
+
+        $search = $request->query->get('search');
+
+        $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $users = $usersRepo->searchForName($search);
+
+        return $this->render('default/userSearch.html.twig', array(
+                    'users' => $users
+        ));
+    }
+
+    /**
      * @Route("/info", name="info")
      */
     public function infoAction(Request $request) {
-        $post = Request::createFromGlobals();
-        if ($post->request->has('submit')) {
-            $name = $post->request->get('name');
-            
-            $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $user = $usersRepo->findOneBy(array('name' => $name, 'complete' => 1));            
-            
-            $answerRepository = $this->getDoctrine()->getRepository('AppBundle:Answer');
-            $answers = $answerRepository->findBy(array('user' => $user));
-            
-            $betRepository = $this->getDoctrine()->getRepository('AppBundle:Bet');
-            $bets = $betRepository->findBy(array('user' => $user));            
-            
-            return $this->render('default/detail.html.twig', array(
-                'user' => $user,
-                'answers' => $answers,
-                'bets' => $bets
-            ));
-        } else {
-            $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $users = $usersRepo->findBy(array('complete' => 1));
+        $name = $request->query->get('name');
 
-            return $this->render('default/info.html.twig', array(
-                        'users' => $users
-            ));
-        }
+        $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $user = $usersRepo->findOneBy(array('name' => $name, 'complete' => 1));
+
+        $answerRepository = $this->getDoctrine()->getRepository('AppBundle:Answer');
+        $answers = $answerRepository->findBy(array('user' => $user));
+
+        $betRepository = $this->getDoctrine()->getRepository('AppBundle:Bet');
+        $bets = $betRepository->findBy(array('user' => $user));
+
+        return $this->render('default/detail.html.twig', array(
+                    'user' => $user,
+                    'answers' => $answers,
+                    'bets' => $bets
+        ));
     }
 
     /**
@@ -92,14 +97,14 @@ class DefaultController extends Controller {
 
             $initalQuestionIndex = $post->request->get('questionInitalIndex');
             $questionCount = $post->request->get('questionCount');
-            
+
             $questionRepository = $this->getDoctrine()->getRepository('AppBundle:Question');
-            
+
             for ($initalQuestionIndex; $initalQuestionIndex <= $questionCount; $initalQuestionIndex++) {
                 $answerText = $post->request->get('answer' . $initalQuestionIndex);
                 $questionId = $post->request->get('questionId' . $initalQuestionIndex);
                 $question = $questionRepository->findOneById($questionId);
-                
+
                 $answer = new Answer();
                 $answer->setAnswer($answerText);
                 $answer->setQuestion($question);
@@ -174,7 +179,7 @@ class DefaultController extends Controller {
             $gameRepository = $this->getDoctrine()->getRepository('AppBundle:Game');
             $repository = $this->getDoctrine()->getRepository('AppBundle:User');
             $user = $repository->findOneById($userId);
-            
+
             $initalGameIndex = $post->request->get('gameInitalIndex');
             $gameCount = $post->request->get('gameCount');
 
@@ -192,7 +197,7 @@ class DefaultController extends Controller {
 
                 $em->persist($bet);
             }
-            
+
             $user->setComplete(true);
             $em->flush();
 

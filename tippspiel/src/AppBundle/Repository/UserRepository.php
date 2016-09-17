@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {    
+    
+    public function searchForName($search) {
+        $query = $this->_em->createQuery('SELECT u FROM AppBundle\Entity\User u WHERE u.name like :search and u.complete=1');
+        $query->setParameter('search', '%'.$search.'%');
+        return $query->getResult();        
+    }
+    
 }

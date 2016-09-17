@@ -13,6 +13,7 @@ strong { font-weight: 500; }
 a, a:hover, a:focus {
 	color: #323296;
 	text-decoration: none;
+        cursor: pointer;
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 

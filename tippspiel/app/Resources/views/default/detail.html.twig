@@ -1,45 +1,33 @@
-{% extends 'base.html.twig' %}
+    
 
-{% block body %}
-
+<p>Hier sind die Tipps von {{ user.name }}</p>
+<p>
+    {% for answer in answers %}
+        {{answer.question.question}} <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
+    {% endfor %}
+</p>
+<hr><hr>
+<p>
+    {% for bet in bets %}
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
-            <p>Hier sind die Tipps von {{ user.name }}</p>
-            <p>
-                 {% for answer in answers %}
-                      {{answer.question.question}} <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
-                {% endfor %}
-            </p>
-            <hr><hr>
-            <p>
-                 {% for bet in bets %}
-                     
-                     
-                    <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                                <p>{{ bet.game.hometeam.name|e }}<p>
-                            </div>
-                            <div class="col-xs-12 col-md-1">
-                                <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
-                            </div>
-                            <div class="col-xs-12 col-md-1 text-center"> : </div>
-                            <div class="col-xs-12 col-md-1">
-                                <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
-                            </div>     
-                            <div class="col-xs-12 col-md-1"></div>
-                            <div class="col-xs-12 col-md-4">
-                                <p>{{ bet.game.guestteam.name|e }} <p>
-                            </div>                            
-                        </div>                     
-                     
-                     <a href=""></a>
-                     
-                 <br><hr>
-                     
-                {% endfor %}
-            </p>            
-            
+        <div class="col-xs-12 col-md-4">
+            <p>{{ bet.game.hometeam.name|e }}<p>
         </div>
-    </div>
+        <div class="col-xs-12 col-md-1">
+            <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
+        </div>
+        <div class="col-xs-12 col-md-1 text-center"> : </div>
+        <div class="col-xs-12 col-md-1">
+            <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
+        </div>     
+        <div class="col-xs-12 col-md-1"></div>
+        <div class="col-xs-12 col-md-4">
+            <p>{{ bet.game.guestteam.name|e }} <p>
+        </div>                            
+    </div>                     
+    <br><hr>
 
-{% endblock %}
+{% endfor %}
+</p>            
+
+
