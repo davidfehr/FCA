@@ -3,7 +3,7 @@
 {% block custom_javascript %}
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
         });
     </script>
 
@@ -13,17 +13,24 @@
     <p>Hier sind die Antworten zu "{{ question.question }}"</p>
 
     <p>
-    <div class="row">
-        <div class="f1">
-            {% for answer in answers %}
-                {% if(answer.user.complete == true) %}
-                    <p>
-                    {{ answer.user.name }} <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
-                    </p>
-                    {% endif %}
-                {% endfor %}   
-        </div>
-    </div>                     
+    
+        {% for answer in answers %}
+            {% if(answer.user.complete == true) %}
+                
+            <div class="row"> 
+                <div class="col-xs-12 col-md-4">
+                    <a href="{{ path('userDetail', { 'userId': answer.user.id }) }}">{{ answer.user.name }}</a>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled>
+                </div>
+            </div>
+                <hr>                
+                
+                
+            {% endif %}
+        {% endfor %}   
+    
     <br><hr>
 </p>     
 

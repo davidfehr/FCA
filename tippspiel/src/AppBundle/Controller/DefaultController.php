@@ -54,6 +54,98 @@ class DefaultController extends Controller {
                     'bets' => $bets
         ));
     }
+    
+    /**
+     * @Route("/user", name="user")
+     */
+    public function userAction(Request $request) {
+        $post = Request::createFromGlobals();
+
+        if ($post->request->has('submit')) {
+            $name = $post->request->get('name');
+            $email = $post->request->get('email');
+
+            $em = $this->getDoctrine()->getManager();
+
+            $user = new User();
+            $user->setName($name);
+            $user->setEmail($email);
+            $user->setComplete(0);
+            $em->persist($user);
+            $em->flush();
+
+            $session = $request->getSession();
+            $session->set('userName', $name);
+            $session->set('userId', $user->getId());
+
+            $initalQuestionIndex = $post->request->get('questionInitalIndex');
+            $questionCount = $post->request->get('questionCount');
+
+            $questionRepository = $this->getDoctrine()->getRepository('AppBundle:Question');
+
+            for ($initalQuestionIndex; $initalQuestionIndex <= $questionCount; $initalQuestionIndex++) {
+                $answerText = $post->request->get('answer' . $initalQuestionIndex);
+                $questionId = $post->request->get('questionId' . $initalQuestionIndex);
+                $question = $questionRepository->findOneById($questionId);
+
+                $answer = new Answer();
+                $answer->setAnswer($answerText);
+                $answer->setQuestion($question);
+                $answer->setUser($user);
+
+                $em->persist($answer);
+            }
+
+            $em->flush();
+
+            return $this->renderBet($name);
+        } else {
+            $questionRepository = $this->getDoctrine()->getRepository('AppBundle:Question');
+            $questions = $questionRepository->findAll();
+            $openQuestions = $questionRepository->findBy(array('type' => 1));
+            $coachQuestions = $questionRepository->findBy(array('type' => 2));
+            $selectBuli1Questions = $questionRepository->findBy(array('type' => 3));
+            $selectKreisligaQuestions = $questionRepository->findBy(array('type' => 4));
+            $selectAklasseQuestions = $questionRepository->findBy(array('type' => 5));
+            $placementAichQuestions = $questionRepository->findBy(array('type' => 6));
+            $roundQuestions = $questionRepository->findBy(array('type' => 7));
+            $placementBuli1Questions = $questionRepository->findBy(array('type' => 8));
+            $placementBuli2Questions = $questionRepository->findBy(array('type' => 9));
+
+            $leagueRepo = $this->getDoctrine()->getRepository('AppBundle:League');
+            $bundesliga = $leagueRepo->findOneBy(array('name' => '1.Bundesliga'));
+            $bundesliga2 = $leagueRepo->findOneBy(array('name' => '2.Bundesliga'));
+            $kreisliga = $leagueRepo->findOneBy(array('name' => 'Kreisliga I'));
+            $aklasse = $leagueRepo->findOneBy(array('name' => 'A-Klasse I'));
+
+            $teamRepo = $this->getDoctrine()->getRepository('AppBundle:Team');
+            $buliTeams = $teamRepo->findBy(array('league' => $bundesliga));
+            $buli2Teams = $teamRepo->findBy(array('league' => $bundesliga2));
+            $kreisligaTeams = $teamRepo->findBy(array('league' => $kreisliga));
+            $aklassenTeams = $teamRepo->findBy(array('league' => $aklasse));
+
+            $roundRepo = $this->getDoctrine()->getRepository('AppBundle:Round');
+            $rounds = $roundRepo->findAll();
+
+            return $this->render('default/user.html.twig', array(
+                        'questions' => $questions,
+                        'openQuestions' => $openQuestions,
+                        'coachQuestions' => $coachQuestions,
+                        'selectBuli1Questions' => $selectBuli1Questions,
+                        'selectKreisligaQuestions' => $selectKreisligaQuestions,
+                        'selectAklasseQuestions' => $selectAklasseQuestions,
+                        'placementAichQuestions' => $placementAichQuestions,
+                        'roundQuestions' => $roundQuestions,
+                        'placementBuli1Questions' => $placementBuli1Questions,
+                        'placementBuli2Questions' => $placementBuli2Questions,
+                        'buliTeams' => $buliTeams,
+                        'buli2Teams' => $buli2Teams,
+                        'kreisligaTeams' => $kreisligaTeams,
+                        'aklassenTeams' => $aklassenTeams,
+                        'rounds' => $rounds
+            ));
+        }
+    }
 
     /**
      * @Route("/detail", name="detail")
@@ -71,23 +163,60 @@ class DefaultController extends Controller {
             ));
         }
     }
+    
+    /**
+     * @Route("/userDetail/{userId}", name="userDetail")
+     */
+    public function userDetailAction($userId, Request $request) {
+        
+        $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $user = $usersRepo->findOneBy(array('id' => $userId, 'complete' => 1));
+
+        $answerRepository = $this->getDoctrine()->getRepository('AppBundle:Answer');
+        $answers = $answerRepository->findBy(array('user' => $user));
+
+        $betRepository = $this->getDoctrine()->getRepository('AppBundle:Bet');
+        $bets = $betRepository->findBy(array('user' => $user));
+
+        return $this->render('default/userDetail.html.twig', array(
+                    'user' => $user,
+                    'answers' => $answers,
+                    'bets' => $bets
+        ));        
+    }  
+    
+    /**
+     * @Route("/gameDetail/{gameId}", name="gameDetail")
+     */
+    public function gameDetailAction($gameId, Request $request) {
+        
+        $gameRepo = $this->getDoctrine()->getRepository('AppBundle:Game');
+        $game = $gameRepo->findOneBy(array('id' => $gameId));        
+        
+        $betRepo = $this->getDoctrine()->getRepository('AppBundle:Bet');
+        $bets = $betRepo->findBy(array('game' => $game));
+
+        return $this->render('default/gameDetail.html.twig', array(
+                    'game' => $game,
+                    'bets' => $bets
+        ));        
+    }    
 
     /**
      * @Route("/questionDetail/{questionId}", name="questionDetail")
      */
     public function questionDetailAction($questionId, Request $request) {
-        
+
         $questionRepo = $this->getDoctrine()->getRepository('AppBundle:Question');
         $question = $questionRepo->findOneBy(array('id' => $questionId));
-        
+
         $answerRepo = $this->getDoctrine()->getRepository('AppBundle:Answer');
         $answers = $answerRepo->findBy(array('question' => $question));
-        
-            return $this->render('default/questionDetail.html.twig', array(
-                'question' => $question,
-                'answers' => $answers
-                    
-            ));        
+
+        return $this->render('default/questionDetail.html.twig', array(
+                    'question' => $question,
+                    'answers' => $answers
+        ));
     }
 
     /**

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block custom_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+
+{% endblock %}            
+
+{% block body %}
+    <p>{{ game.homeTeam.name }} : {{ game.guestTeam.name }}</p>
+
+    {% for bet in bets %}
+        {% if(bet.user.complete == true) %}
+
+            <div class="row"> 
+                <div class="col-xs-12 col-md-4">
+                    <a href="{{ path('userDetail', { 'userId': bet.user.id }) }}">{{ bet.user.name }}</a>
+                </div>
+                <div class="col-xs-12 col-md-1">
+                    <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
+                </div>
+                <div class="col-xs-12 col-md-1 text-center"> : </div>
+                <div class="col-xs-12 col-md-1">
+                    <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
+                </div>     
+                <div class="col-xs-12 col-md-1"></div>
+                <div class="col-xs-12 col-md-4">
+                </div>
+            </div>
+                <hr>
+
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
+
+
