@@ -1,9 +1,7 @@
-    
-
 <p>Hier sind die Tipps von {{ user.name }}</p>
 <p>
     {% for answer in answers %}
-        {{answer.question.question}} <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
+        <a href="{{ path('questionDetail', {'questionId': answer.question.id}) }}">{{answer.question.question}}</a> <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
     {% endfor %}
 </p>
 <hr><hr>

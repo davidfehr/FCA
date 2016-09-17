@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block customm_javascript %}
+{% block custom_javascript %}
     <script type="text/javascript">
-    $(document).ready(function () {
-            
+        $(document).ready(function () {
+
             function search(search) {
                 $.ajax({
                     url: "{{ path('search') }}",
@@ -14,9 +14,9 @@
                     $('#bet-result').hide();
                     $('#search-result').show();
                 });
-            }            
-            
-            $('body').on('click', 'a' ,function () {
+            }
+
+            $('body').on('click', 'a', function () {
                 userName = $(this).data("user-name");
                 $.ajax({
                     url: "{{ path('info') }}",
@@ -39,8 +39,6 @@
                 search(searchString);
             });
         });
-
-
     </script>    
 
 {% endblock %}
@@ -49,29 +47,29 @@
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
-                    <h4>Tipper suchen</h4>
-                    <p style="font-size:10px;">Einfach Name des Tippers eingeben</p>
-                    <div class="form-group">
-                        <label class="sr-only" for="f1-name">Name</label>
-                        <input type="search" name="search" placeholder="Name..." class="f1-email form-control" id="f1-name">
-                    </div>
-                    <div class="f1-buttons">
-                        <button id="searchAll" class="btn btn-previous">Alle User anzeigen</button>
-                        <button id="searchSubmit" class="btn btn-submit">Suchen</button>
-                    </div>
+            <h4>Tipper suchen</h4>
+            <p style="font-size:10px;">Einfach Name des Tippers eingeben</p>
+            <div class="form-group">
+                <label class="sr-only" for="f1-name">Name</label>
+                <input type="search" name="search" placeholder="Name..." class="f1-email form-control" id="f1-name">
+            </div>
+            <div class="f1-buttons">
+                <button id="searchAll" class="btn btn-previous">Alle User anzeigen</button>
+                <button id="searchSubmit" class="btn btn-submit">Suchen</button>
+            </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div id="search-result" class="f1" style="display:none">        
-                
+
         </div>
     </div>
 
     <div class="row">
         <div id="bet-result" class="f1" style="display:none">        
-                
+
         </div>
     </div>    
-    
+
 {% endblock %}

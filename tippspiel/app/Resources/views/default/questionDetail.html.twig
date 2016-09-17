@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block custom_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
+    </script>
+
+{% endblock %}            
+
+{% block body %}
+    <p>Hier sind die Antworten zu "{{ question.question }}"</p>
+
+    <p>
+    <div class="row">
+        <div class="f1">
+            {% for answer in answers %}
+                {% if(answer.user.complete == true) %}
+                    <p>
+                    {{ answer.user.name }} <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
+                    </p>
+                    {% endif %}
+                {% endfor %}   
+        </div>
+    </div>                     
+    <br><hr>
+</p>     
+
+{% endblock %}
+
+
