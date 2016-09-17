@@ -10,30 +10,43 @@
 {% endblock %}            
 
 {% block body %}
-    <p>{{ game.homeTeam.name }} : {{ game.guestTeam.name }}</p>
-
-    {% for bet in bets %}
-        {% if(bet.user.complete == true) %}
-
-            <div class="row"> 
-                <div class="col-xs-12 col-md-4">
-                    <a href="{{ path('userDetail', { 'userId': bet.user.id }) }}">{{ bet.user.name }}</a>
-                </div>
-                <div class="col-xs-12 col-md-1">
-                    <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
-                </div>
-                <div class="col-xs-12 col-md-1 text-center"> : </div>
-                <div class="col-xs-12 col-md-1">
-                    <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
-                </div>     
-                <div class="col-xs-12 col-md-1"></div>
-                <div class="col-xs-12 col-md-4">
-                </div>
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <div class="f1">
+                <h4>Hier sind die Tipps zu "{{ game.homeTeam.name }} : {{ game.guestTeam.name }}"</h4>
+                <p style="font-size:10px;">Man kann über den Usernamen alle Tipps des jeweiligen Tippers abrufen</p>
             </div>
-                <hr>
+        </div>
+    </div>     
 
-        {% endif %}
-    {% endfor %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+                {% for bet in bets %}
+                    {% if(bet.user.complete == true) %}
+
+                        <div class="row"> 
+                            <div class="col-xs-12 col-md-4">
+                                <a href="{{ path('userDetail', { 'userId': bet.user.id }) }}">{{ bet.user.name }}</a>
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
+                            </div>
+                            <div class="col-xs-12 col-md-1 text-center"> : </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
+                            </div>     
+                            <div class="col-xs-12 col-md-1"></div>
+                            <div class="col-xs-12 col-md-4">
+                            </div>
+                        </div>
+                        <hr>
+
+                    {% endif %}
+                {% endfor %}               
+            </div>
+        </div>
+    </div>            
 
 {% endblock %}
 

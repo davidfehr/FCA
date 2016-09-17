@@ -16,19 +16,6 @@
                 });
             }
 
-            $('body').on('click', 'a', function () {
-                userName = $(this).data("user-name");
-                $.ajax({
-                    url: "{{ path('info') }}",
-                    context: document.body,
-                    data: {name: userName}
-                }).done(function (data) {
-                    $('#bet-result').html(data);
-                    $('#bet-result').show();
-                    $('#search-result').hide();
-                });
-            });
-
             $('#searchAll').on('click', function () {
                 var searchString = '';
                 search(searchString);
@@ -47,29 +34,33 @@
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
-            <h4>Tipper suchen</h4>
-            <p style="font-size:10px;">Einfach Name des Tippers eingeben</p>
-            <div class="form-group">
-                <label class="sr-only" for="f1-name">Name</label>
-                <input type="search" name="search" placeholder="Name..." class="f1-email form-control" id="f1-name">
-            </div>
-            <div class="f1-buttons">
-                <button id="searchAll" class="btn btn-previous">Alle User anzeigen</button>
-                <button id="searchSubmit" class="btn btn-submit">Suchen</button>
+            <div class="f1">
+                
+                    <h4>Welcher Tipper interessiert dich?</h4>
+                    <p style="font-size:10px;">Einfach Name des Tippers eingeben. Es reichen auch schon ein paar Buchstaben davon.</p>
+                    <div class="form-group">
+                        <label class="sr-only" for="f1-name">Name</label>
+                        <input type="search" name="search" placeholder="Name..." class="f1-email form-control" id="f1-name">
+                    </div>
+                    <div class="f1-buttons">
+                        <button id="searchAll" class="btn btn-previous">Alle User anzeigen</button>
+                        <button id="searchSubmit" class="btn btn-submit">Suchen</button>
+                    </div>
+                
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div id="search-result" class="f1" style="display:none">        
-
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div id="search-result" class="f1" style="display:none"></div>
         </div>
     </div>
-
+    
     <div class="row">
-        <div id="bet-result" class="f1" style="display:none">        
-
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div id="bet-result" class="f1" style="display:none"></div>
         </div>
-    </div>    
+    </div>      
 
 {% endblock %}

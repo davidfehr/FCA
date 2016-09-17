@@ -1,40 +1,58 @@
-<p>Hier sind die Tipps von {{ user.name }}</p>
-<p>
-    {% for answer in answers %}
-        <a href="{{ path('questionDetail', {'questionId': answer.question.id}) }}">{{answer.question.question}}</a> <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
-    {% endfor %}
-</p>
-<hr><hr>
-<p>
-    {% for bet in bets %}
-    <div class="row">
-        <div class="col-xs-12 col-md-4">
-            <p>{{ bet.game.hometeam.name|e }}<p>
-        </div>
-        <div class="col-xs-12 col-md-1">
-            <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
-        </div>
-        <div class="col-xs-12 col-md-1 text-center"> : </div>
-        <div class="col-xs-12 col-md-1">
-            <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
-        </div>     
-        <div class="col-xs-12 col-md-1"></div>
-        <div class="col-xs-12 col-md-4">
-            <p>{{ bet.game.guestteam.name|e }} <p>
-        </div>                            
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-4">
-        </div>
-        <div class="col-md-4">
-        <a href="{{ path('gameDetail', { 'gameId': bet.game.id }) }}">Tippübersicht zu diesem Spiel</a>
-        </div>
-        <div class="col-xs-12 col-md-4">
-        </div>        
-    </div>
-    <br><hr>
 
-{% endfor %}
-</p>            
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+        <div class="f1">
+            <h4>Hier sind die Tipps von "{{ user.name }}"</h4>
+            <p style="font-size:10px;">Willst du eine Übersicht aller Antworten zu einer Frage, dann klicke diese einfach.</p>
+        </div>
+    </div>
+</div>  
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+        <div class="f1">
+            {% for answer in answers %}
+                <a href="{{ path('questionDetail', {'questionId': answer.question.id}) }}">{{answer.question.question}}</a> <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
+            {% endfor %}                
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+        <div class="f1">
+            {% for bet in bets %}
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <p>{{ bet.game.hometeam.name|e }}<p>
+                    </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
+                    </div>
+                    <div class="col-xs-12 col-md-1 text-center"> : </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
+                    </div>     
+                    <div class="col-xs-12 col-md-1"></div>
+                    <div class="col-xs-12 col-md-4">
+                        <p>{{ bet.game.guestteam.name|e }} <p>
+                    </div>                            
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <a href="{{ path('gameDetail', { 'gameId': bet.game.id }) }}">Tippübersicht zu diesem Spiel</a>
+                    </div>
+                    <div class="col-xs-12 col-md-2">
+                    </div>        
+                </div>
+                <hr>
+            {% endfor %}              
+        </div>
+    </div>
+</div>
+
+
 
 

@@ -19,6 +19,36 @@ class DefaultController extends Controller {
     }
 
     /**
+     * @Route("/ranking", name="ranking")
+     */
+    public function rankingAction(Request $request) {
+        return $this->render('default/ranking.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/allGames", name="allGames")
+     */
+    public function allGamesAction(Request $request) {
+        $gameRepo = $this->getDoctrine()->getRepository('AppBundle:Game');
+        $games = $gameRepo->findAll();        
+        return $this->render('default/allGames.html.twig', array(
+                    'games' => $games
+        ));
+    }
+
+    /**
+     * @Route("/allQuestions", name="allQuestions")
+     */
+    public function allQuestionsAction(Request $request) {
+        $questionRepo = $this->getDoctrine()->getRepository('AppBundle:Question');
+        $questions = $questionRepo->findAll();
+        return $this->render('default/allQuestions.html.twig', array(
+                    'questions' => $questions
+        ));
+    }
+
+    /**
      * @Route("/search", name="search")
      */
     public function searchAction(Request $request) {
@@ -34,9 +64,11 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/info", name="info")
+     * AJAX
+     * 
+     * @Route("/detail", name="detail")
      */
-    public function infoAction(Request $request) {
+    public function detailAction(Request $request) {
         $name = $request->query->get('name');
 
         $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
@@ -54,7 +86,7 @@ class DefaultController extends Controller {
                     'bets' => $bets
         ));
     }
-    
+
     /**
      * @Route("/user", name="user")
      */
@@ -148,27 +180,18 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/detail", name="detail")
+     * @Route("/info", name="info")
      */
-    public function detailAction(Request $request) {
-        $post = Request::createFromGlobals();
-        if ($post->request->has('submit')) {
-            $name = $post->request->get('name');
-        } else {
-            $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $users = $usersRepo->findBy(array('complete' => 1));
-
-            return $this->render('default/info.html.twig', array(
-                        'users' => $users
-            ));
-        }
+    public function infoAction(Request $request) {
+        return $this->render('default/info.html.twig', array(
+        ));
     }
-    
+
     /**
      * @Route("/userDetail/{userId}", name="userDetail")
      */
     public function userDetailAction($userId, Request $request) {
-        
+
         $usersRepo = $this->getDoctrine()->getRepository('AppBundle:User');
         $user = $usersRepo->findOneBy(array('id' => $userId, 'complete' => 1));
 
@@ -182,25 +205,25 @@ class DefaultController extends Controller {
                     'user' => $user,
                     'answers' => $answers,
                     'bets' => $bets
-        ));        
-    }  
-    
+        ));
+    }
+
     /**
      * @Route("/gameDetail/{gameId}", name="gameDetail")
      */
     public function gameDetailAction($gameId, Request $request) {
-        
+
         $gameRepo = $this->getDoctrine()->getRepository('AppBundle:Game');
-        $game = $gameRepo->findOneBy(array('id' => $gameId));        
-        
+        $game = $gameRepo->findOneBy(array('id' => $gameId));
+
         $betRepo = $this->getDoctrine()->getRepository('AppBundle:Bet');
         $bets = $betRepo->findBy(array('game' => $game));
 
         return $this->render('default/gameDetail.html.twig', array(
                     'game' => $game,
                     'bets' => $bets
-        ));        
-    }    
+        ));
+    }
 
     /**
      * @Route("/questionDetail/{questionId}", name="questionDetail")

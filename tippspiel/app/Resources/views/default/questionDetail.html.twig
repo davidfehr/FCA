@@ -10,28 +10,37 @@
 {% endblock %}            
 
 {% block body %}
-    <p>Hier sind die Antworten zu "{{ question.question }}"</p>
 
-    <p>
-    
-        {% for answer in answers %}
-            {% if(answer.user.complete == true) %}
-                
-            <div class="row"> 
-                <div class="col-xs-12 col-md-4">
-                    <a href="{{ path('userDetail', { 'userId': answer.user.id }) }}">{{ answer.user.name }}</a>
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled>
-                </div>
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <div class="f1">
+                <h4>Hier sind die Antworten zu "{{ question.question }}"</h4>
+                <p style="font-size:10px;">Man kann über den Usernamen alle Tipps des jeweiligen Tippers abrufen</p>
             </div>
-                <hr>                
-                
-                
-            {% endif %}
-        {% endfor %}   
-    
-    <br><hr>
+        </div>
+    </div>    
+
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+                {% for answer in answers %}
+                    {% if(answer.user.complete == true) %}
+                        <div class="row"> 
+                            <div class="col-xs-12 col-md-4">
+                                <a href="{{ path('userDetail', { 'userId': answer.user.id }) }}">{{ answer.user.name }}</a>
+                            </div>
+                            <div class="col-xs-12 col-md-8">
+                                <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled>
+                            </div>
+                        </div>
+                        <hr>                
+                    {% endif %}
+                {% endfor %}   
+            </div>
+        </div>
+    </div>    
+
 </p>     
 
 {% endblock %}
