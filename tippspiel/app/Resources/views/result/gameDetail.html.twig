@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block custom_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+
+{% endblock %}            
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <div class="f1">
+                <h4>Hier sind die Tipps zu "{{ game.homeTeam.name }} : {{ game.guestTeam.name }}"</h4>
+                <p style="font-size:10px;">Man kann über den Usernamen alle Tipps des jeweiligen Tippers abrufen</p>
+            </div>
+        </div>
+    </div>  
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+
+
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-4">
+                        KORREKTES ERGEBNIS:
+                    </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ game.homeTeamScore }}" disabled>
+                    </div>
+                    <div class="col-xs-12 col-md-1 text-center"> : </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ game.guestTeamScore }}" disabled>                    
+                    </div>     
+                    <div class="col-xs-12 col-md-1"></div>
+                    <div class="col-xs-12 col-md-4">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>                 
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+                {% for bet in bets %}
+                    {% if(bet.user.complete == true) %}
+
+                        <div class="row"> 
+                            <div class="col-xs-12 col-md-4">
+                                <a href="{{ path('userDetail', { 'userId': bet.user.id }) }}">{{ bet.user.name }}</a>
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.homeTeamScore }}" disabled>
+                            </div>
+                            <div class="col-xs-12 col-md-1 text-center"> : </div>
+                            <div class="col-xs-12 col-md-1">
+                                <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ bet.guestTeamScore }}" disabled>                    
+                            </div>     
+                            <div class="col-xs-12 col-md-1"></div>
+                            <div class="col-xs-12 col-md-4">
+                                {% if(game.homeTeamScore is null) or (game.guestTeamScore is null) %}    
+                                    ???                                                                    
+                                {% elseif(bet.homeTeamScore == game.homeTeamScore) and (bet.guestTeamScore == game.guestTeamScore) %}
+                                    RICHTIG
+                                {% elseif(bet.homeTeamScore > bet.guestTeamScore) and (game.homeTeamScore > game.guestTeamScore) %}
+                                    TENDENZ                                    
+                                {% elseif(bet.homeTeamScore < bet.guestTeamScore) and (game.homeTeamScore < game.guestTeamScore) %}
+                                    TENDENZ                                    
+                                {% elseif(bet.homeTeamScore == bet.guestTeamScore) and (game.homeTeamScore == game.guestTeamScore) %}
+                                    TENDENZ                                                                        
+                                {% else %}
+                                    FALSCH
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+
+                    {% endif %}
+                {% endfor %}               
+            </div>
+        </div>
+    </div>            
+
+{% endblock %}
+
+

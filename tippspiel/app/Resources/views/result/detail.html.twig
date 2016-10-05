@@ -10,9 +10,26 @@
 
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
-        <div class="f1">
+        <div class="f1 row">
             {% for answer in answers %}
-                <a href="{{ path('questionDetail', {'questionId': answer.question.id}) }}">{{answer.question.question}}</a> <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
+                <div class="col-xs-12 col-md-12">
+                    <a href="{{ path('questionDetail', {'questionId': answer.question.id}) }}">{{answer.question.question}}</a> 
+                </div>
+                <div class="row" style="border-bottom: 1px #eee solid">
+                    <div class="col-xs-12 col-md-8">
+                        <input class="form-control" id="disabledInput" type="text" placeholder="{{ answer.answer }}" disabled><br>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        {% if(answer.answer == answer.question.correctAnswer) %}
+                            RICHTIG
+                        {% elseif(answer.question.correctAnswer == null) %}
+                            ???
+                        {% else %}
+                            FALSCH
+                        {% endif %}                    
+                    </div>
+                </div>
+                
             {% endfor %}                
         </div>
     </div>
@@ -47,6 +64,19 @@
                     <div class="col-xs-12 col-md-2">
                     </div>        
                 </div>
+                    {% if(bet.game.homeTeamScore == null) or (bet.game.guestTeamScore == null) %}    
+                        ???
+                    {% elseif(bet.homeTeamScore == bet.game.homeTeamScore) and (bet.guestTeamScore == bet.game.guestTeamScore) %}
+                        RICHTIG
+                    {% elseif(bet.homeTeamScore > bet.guestTeamScore) and (bet.game.homeTeamScore > bet.game.guestTeamScore) %}
+                        TENDENZ                                    
+                    {% elseif(bet.homeTeamScore < bet.guestTeamScore) and (bet.game.homeTeamScore < bet.game.guestTeamScore) %}
+                        TENDENZ                                    
+                    {% elseif(bet.homeTeamScore == bet.guestTeamScore) and (bet.game.homeTeamScore == bet.game.guestTeamScore) %}
+                        TENDENZ                            
+                    {% else %}
+                        FALSCH
+                    {% endif %}                    
                 <hr>
             {% endfor %}              
         </div>

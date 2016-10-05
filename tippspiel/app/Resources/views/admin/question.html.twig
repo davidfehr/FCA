@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block custom_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+
+{% endblock %}            
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <div class="f1">
+                <h4>Frage: "{{ question.question }}"</h4>
+                <p style="font-size:10px;">Bitte pflege das richtige Ergebnis</p>
+            </div>
+        </div>
+    </div>    
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" > 
+            <form role="form" action="{{ path('updateAdminQuestion') }}" method="post" class="f1">
+                <input type="hidden" name="questionId" id="inputQuestionId" value="{{ question.id|e }}">            
+                {% if (question.type.id == 1) %}
+                    <div class="row"> 
+                        <div class="col-xs-12 col-md-8">
+                            <input class="form-control" id="disabledInput" name="answer" type="text" placeholder="Antwort">
+                        </div>
+                    </div>  
+                {% elseif (question.type.id == 2) %}
+                    <select class="form-control" name="answer">
+                        <option>Bitte auswählen</option>
+                        {% for answer in question.possibleAnswers %}
+                            <option value="{{ answer.answer|e }}">{{ answer.answer|e }}</option>
+                        {% endfor %}           
+                    </select>                 
+                {% elseif (question.type.id == 4) %}
+                    <select class="form-control" name="answer">
+                        <option>Bitte auswählen</option>
+                        {% for team in kreisligaTeams %}
+                            <option value="{{ team.name|e }}">{{ team.name|e }}</option>
+                        {% endfor %}           
+                    </select>                    
+                {% elseif (question.type.id == 5) %}
+                    <select class="form-control" name="answer">
+                        <option>Bitte auswählen</option>
+                        {% for team in aklassenTeams %}
+                            <option value="{{ team.name|e }}">{{ team.name|e }}</option>
+                        {% endfor %}           
+                    </select>                     
+                {% elseif (question.type.id == 6) %}
+                    <select class="form-control" name="answer">
+                        <option>Bitte auswählen</option>
+                        {% for i in 1..16 %}
+                            <option value="{{ i|e }}">{{ i|e }}</option>
+                        {% endfor %}           
+                    </select>    
+                {% elseif (question.type.id == 7) %}                            
+                    <select class="form-control" name="answer">
+                        <option>Bitte auswählen</option>
+                        {% for round in rounds %}
+                            <option value="{{ round.name|e }}">{{ round.name|e }}</option>
+                        {% endfor %}           
+                    </select>    
+                {% elseif (question.type.id == 8) %}
+                    <select class="form-control" name="answer">
+                        <option>Bitte auswählen</option>
+                        {% for team in buliTeams %}
+                            <option value="{{ team.name|e }}">{{ team.name|e }}</option>
+                        {% endfor %}         
+                    </select>                          
+                {% elseif (question.type.id == 9) %}
+                    <select class="form-control" name="answer{{ question.id|e }}">
+                        <option>Bitte auswählen</option>
+                        {% for team in buli2Teams %}
+                            <option value="{{ team.name|e }}">{{ team.name|e }}</option>
+                        {% endfor %}         
+                    </select>                          
+                {% elseif (question.type.id == 7) %}
+                {% endif %}
+                <br>
+                <div class="f1-buttons">
+                    <button type="button" class="btn btn-previous">zurück</button>
+                    <button type="submit" name="submit" class="btn btn-submit">Ergebnis speichern</button>
+                </div>  
+            </form>
+        </div>
+    </div>  
+</p>     
+
+{% endblock %}
+
+

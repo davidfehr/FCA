@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block custom_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+
+{% endblock %}            
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <div class="f1">
+                <h4>"{{ game.homeTeam.name }} : {{ game.guestTeam.name }}"</h4>
+                <p style="font-size:10px;">Pflege das Ergebnis für dieses Spiel</p>
+            </div>
+        </div>
+    </div>     
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >  
+            <form role="form" action="{{ path('updateAdminGame') }}" method="post" class="f1">
+                <input type="hidden" name="gameId" id="inputGameId" value="{{ game.id|e }}">
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" name="homeTeamScore" maxlength="2" id="disabledInput" placeholder="Tore">
+                    </div>
+                    <div class="col-xs-12 col-md-1 text-center"> : </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" name="guestTeamScore" maxlength="2" id="disabledInput" placeholder="Tore">                    
+                    </div>     
+                    <div class="col-xs-12 col-md-1"></div>
+                    <div class="col-xs-12 col-md-4">
+                    </div>
+                </div>
+
+                <div class="f1-buttons">
+                    <button type="button" class="btn btn-previous">zurück</button>
+                    <button type="submit" name="submit" class="btn btn-submit">Ergebnis speichern</button>
+                </div>
+
+            </form>
+        </div>
+    </div>            
+
+{% endblock %}
+
+
