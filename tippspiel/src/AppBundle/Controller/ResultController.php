@@ -30,6 +30,8 @@ class ResultController extends Controller {
         $answerRepo = $this->getDoctrine()->getRepository('AppBundle:Answer');
         $answers = $answerRepo->findByQuestions($questions);
         
+        $typeRepo = $this->getDoctrine()->getRepository('AppBundle:QuestionType');
+        $roundRepo = $this->getDoctrine()->getRepository('AppBundle:Round');
         foreach($answers as $answer) {
             if(!isset($usersArray[$answer->getUser()->getId()])) {
                 continue;
@@ -47,21 +49,40 @@ class ResultController extends Controller {
                     $currentUserPoints = $currentUserPoints + 10; //Champion Kreisliga
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') {                     
                     $currentUserPoints = $currentUserPoints + 5; //Platzierung Aich
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_TEAM_BULI' ||
-                        $answer->getQuestion()->getType()->getName() == 'SELECTION_TEAM_BULI2') {                     
+                } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI' ||
+                        $answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI2') {                     
                     $currentUserPoints = $currentUserPoints + 6; //Platzierung Buli
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_ROUND') {                     
                     $currentUserPoints = $currentUserPoints + 5; //Platzierung Buli
                 } 
-            } else {
+            } elseif($answer->getQuestion()->getCorrectAnswer() != null) {
+                $correction = 0;
                 if($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') {                     
-                    // -1
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_TEAM_BULI' ||
-                        $answer->getQuestion()->getType()->getName() == 'SELECTION_TEAM_BULI2') {                     
-                    // +3 for correct club
+                    $correction = 5 - abs($answer->getQuestion()->getCorrectAnswer() - $answer->getAnswer());
+                } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI') {
+                    $type = $typeRepo->findOneByName('PLACEMENT_BULI');
+                    $questions = $questionRepo->getRankedTeams($type);
+                    foreach($questions as $question) {
+                        if($question->getCorrectAnswer() == $answer->getAnswer()) {    
+                            $correction = 3;
+                            break;
+                        }
+                    }
+                } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI2') {
+                    $type = $typeRepo->findOneByName('PLACEMENT_BULI2');
+                    $questions = $questionRepo->getRankedTeams($type);
+                    foreach($questions as $question) {
+                        if($question->getCorrectAnswer() == $answer->getAnswer()) {    
+                            $correction = 3;
+                            break;
+                        }
+                    }                    
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_ROUND') {                     
-                    // -2
+                    $round1 = $roundRepo->findOneByName($answer->getAnswer());
+                    $round2 = $roundRepo->findOneByName($answer->getQuestion()->getCorrectAnswer());
+                    $correction = (5 - (abs($round1->getId() - $round2->getId())*2));
                 }
+                $currentUserPoints = $currentUserPoints + $correction;
             }
             $usersArray[$answer->getUser()->getId()][1] = $currentUserPoints;
         }        
