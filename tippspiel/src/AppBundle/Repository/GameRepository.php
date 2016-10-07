@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class GameRepository extends \Doctrine\ORM\EntityRepository
 {
+    
+    public function getFinishedGames() {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT g FROM AppBundle:Game g WHERE g.homeTeamScore IS NOT NULL AND g.guestTeamScore IS NOT NULL'
+            )
+            ->getResult();       
+    }
+    
 }

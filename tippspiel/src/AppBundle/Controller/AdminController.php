@@ -15,7 +15,7 @@ class AdminController extends Controller {
         return $this->render('admin/info.html.twig', array(
         ));
     }
-    
+
     /**
      * @Route("/adminGames", name="adminGames")
      */
@@ -23,7 +23,7 @@ class AdminController extends Controller {
         $gameRepo = $this->getDoctrine()->getRepository('AppBundle:Game');
         $games = $gameRepo->findAll();
         return $this->render('admin/allGames.html.twig', array(
-            'games' => $games
+                    'games' => $games
         ));
     }
 
@@ -32,11 +32,11 @@ class AdminController extends Controller {
      */
     public function adminQuestionsAction(Request $request) {
         $questionRepo = $this->getDoctrine()->getRepository('AppBundle:Question');
-        $questions = $questionRepo->findAll();        
+        $questions = $questionRepo->findAll();
         return $this->render('admin/allQuestions.html.twig', array(
-            'questions' => $questions
+                    'questions' => $questions
         ));
-    }    
+    }
 
     /**
      * @Route("/adminGame/{gameId}", name="adminGame")
@@ -48,39 +48,39 @@ class AdminController extends Controller {
                     'game' => $game
         ));
     }
-    
+
     /**
      * @Route("/adminQuestion/{questionId}", name="adminQuestion")
      */
     public function adminQuestionAction($questionId, Request $request) {
         $questionRepo = $this->getDoctrine()->getRepository('AppBundle:Question');
         $question = $questionRepo->findOneBy(array('id' => $questionId));
-        
-            $leagueRepo = $this->getDoctrine()->getRepository('AppBundle:League');
-            $bundesliga = $leagueRepo->findOneBy(array('name' => '1.Bundesliga'));
-            $bundesliga2 = $leagueRepo->findOneBy(array('name' => '2.Bundesliga'));
-            $kreisliga = $leagueRepo->findOneBy(array('name' => 'Kreisliga I'));
-            $aklasse = $leagueRepo->findOneBy(array('name' => 'A-Klasse I'));
 
-            $teamRepo = $this->getDoctrine()->getRepository('AppBundle:Team');
-            $buliTeams = $teamRepo->findBy(array('league' => $bundesliga));
-            $buli2Teams = $teamRepo->findBy(array('league' => $bundesliga2));
-            $kreisligaTeams = $teamRepo->findBy(array('league' => $kreisliga));
-            $aklassenTeams = $teamRepo->findBy(array('league' => $aklasse));
+        $leagueRepo = $this->getDoctrine()->getRepository('AppBundle:League');
+        $bundesliga = $leagueRepo->findOneBy(array('name' => '1.Bundesliga'));
+        $bundesliga2 = $leagueRepo->findOneBy(array('name' => '2.Bundesliga'));
+        $kreisliga = $leagueRepo->findOneBy(array('name' => 'Kreisliga I'));
+        $aklasse = $leagueRepo->findOneBy(array('name' => 'A-Klasse I'));
 
-            $roundRepo = $this->getDoctrine()->getRepository('AppBundle:Round');
-            $rounds = $roundRepo->findAll();        
-        
-        
+        $teamRepo = $this->getDoctrine()->getRepository('AppBundle:Team');
+        $buliTeams = $teamRepo->findBy(array('league' => $bundesliga));
+        $buli2Teams = $teamRepo->findBy(array('league' => $bundesliga2));
+        $kreisligaTeams = $teamRepo->findBy(array('league' => $kreisliga));
+        $aklassenTeams = $teamRepo->findBy(array('league' => $aklasse));
+
+        $roundRepo = $this->getDoctrine()->getRepository('AppBundle:Round');
+        $rounds = $roundRepo->findAll();
+
+
         return $this->render('admin/question.html.twig', array(
                     'question' => $question,
-                        'buliTeams' => $buliTeams,
-                        'buli2Teams' => $buli2Teams,
-                        'kreisligaTeams' => $kreisligaTeams,
-                        'aklassenTeams' => $aklassenTeams,
-                        'rounds' => $rounds            
+                    'buliTeams' => $buliTeams,
+                    'buli2Teams' => $buli2Teams,
+                    'kreisligaTeams' => $kreisligaTeams,
+                    'aklassenTeams' => $aklassenTeams,
+                    'rounds' => $rounds
         ));
-    }    
+    }
 
     /**
      * @Route("/updateAdminGame", name="updateAdminGame")
@@ -92,21 +92,20 @@ class AdminController extends Controller {
 
         $gameId = $request->get('gameId');
         $game = $gameRepo->findOneBy(array('id' => $gameId));
-        
+
         $homeTeamScore = $request->get('homeTeamScore');
         $game->setHomeTeamScore($homeTeamScore);
-        
+
         $guestTeamScore = $request->get('guestTeamScore');
         $game->setGuestTeamScore($guestTeamScore);
 
         $em->persist($game);
         $em->flush();
-        
+
         return $this->render('admin/info.html.twig', array(
-                    
-        ));        
+        ));
     }
-    
+
     /**
      * @Route("/updateAdminQuestion", name="updateAdminQuestion")
      */
@@ -117,15 +116,15 @@ class AdminController extends Controller {
 
         $questionId = $request->get('questionId');
         $question = $questionRepo->findOneBy(array('id' => $questionId));
-        
+
         $correctAnswer = $request->get('answer');
         $question->setCorrectAnswer($correctAnswer);
 
         $em->persist($question);
         $em->flush();
-        
-        return $this->render('admin/info.html.twig', array(                    
-        ));        
-    }    
+
+        return $this->render('admin/info.html.twig', array(
+        ));
+    }
 
 }

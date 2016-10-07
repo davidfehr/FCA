@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class BetRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByGames($games) {
+        $query = $this->getEntityManager()
+                ->createQuery(
+                'SELECT b FROM AppBundle:Bet b WHERE b.game IN (:games)'
+        );
+
+        $query->setParameter('games', $games);
+
+        return $query->getResult();
+    }    
+    
 }

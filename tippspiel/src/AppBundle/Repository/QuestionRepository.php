@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getFinishedQuestions() {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT q FROM AppBundle:Question q WHERE q.correctAnswer IS NOT NULL'
+            )
+            ->getResult();       
+    }    
 }

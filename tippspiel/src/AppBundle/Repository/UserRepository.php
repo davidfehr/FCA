@@ -17,4 +17,12 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();        
     }
     
+    public function getAllPlayer() {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT u FROM AppBundle:User u WHERE u.complete=1'
+            )
+            ->getResult();         
+    }
+    
 }
