@@ -12,6 +12,7 @@
             <link rel="stylesheet" href="{{ asset('css/form-elements.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
         {% endblock %}
+        <script src="https://use.fontawesome.com/0ea24bcc31.js"></script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -40,10 +41,10 @@
                     <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
                         <div class="f1">
                             <div class="row">
-                                <div class="col-sm-12 col-md-3"><a href="{{ path('info') }}">Tipper suchen</a></div>
-                                <div class="col-sm-12 col-md-3"><a href="{{ path('ranking') }}">Rangliste</a></div>
-                                <div class="col-sm-12 col-md-3"><a href="{{ path('allGames') }}">alle Spiele</a></div>
-                                <div class="col-sm-12 col-md-3"><a href="{{ path('allQuestions') }}">alle Fragen</a></div>
+                                <div class="col-sm-12 col-md-3"><a href="{{ path('info') }}"></i><i class="fa fa-search" aria-hidden="true"></i><br> Tipper suchen</a></div>
+                                <div class="col-sm-12 col-md-3"><a href="{{ path('ranking') }}"><i class="fa fa-trophy" aria-hidden="true"></i><br> Rangliste</a></div>
+                                <div class="col-sm-12 col-md-3"><a href="{{ path('allGames') }}"><i class="fa fa-futbol-o" aria-hidden="true"></i><br> alle Spiele</a></div>
+                                <div class="col-sm-12 col-md-3"><a href="{{ path('allQuestions') }}"><i class="fa fa-question" aria-hidden="true"></i><br> alle Fragen</a></div>
                             </div>
                         </div>
                     </div>

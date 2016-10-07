@@ -22,7 +22,27 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
             <div class="f1">
-                Dauert no a bissal
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Platzierung</th>
+                                <th>Name</th>
+                                <th>Punkte</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td style="text-align: left;"><a href="{{ path('userDetail', { 'userId': user.id }) }}">{{ user.name }}</a></td>
+                                    <td>{{ user.points }}</td>
+                                </tr>
+                            {% endfor %}    
+                        </tbody>
+                    </table>
+                </div>                
             </div>
         </div>
     </div>            

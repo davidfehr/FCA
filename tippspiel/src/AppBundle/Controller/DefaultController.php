@@ -18,7 +18,6 @@ class DefaultController extends Controller {
         return $this->redirectToRoute('user');
     }
     
- 
     /**
      * @Route("/user", name="user")
      */

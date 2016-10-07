@@ -41,7 +41,13 @@ class User
      * @ORM\Column(name="complete", type="boolean", options={"default"=false})
      */
     private $complete;
-    
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="points", type="integer", nullable=true)
+     */
+    private $points;    
     
     /**
      * Get id
@@ -108,6 +114,13 @@ class User
     function setComplete($complete) {
         $this->complete = $complete;
     }
+    
+    function getPoints() {
+        return $this->points;
+    }
 
+    function setPoints($points) {
+        $this->points = $points;
+    }
 }
 

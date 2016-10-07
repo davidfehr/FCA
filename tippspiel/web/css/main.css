@@ -9,3 +9,19 @@ body{
     padding:5px;
     min-width:40px;
 }
+
+.fa-check {
+    color: greenyellow;
+}
+
+.fa-question-circle-o {
+    color: #323296;
+}
+
+.fa-times {
+    color: red;
+}
+
+.fa-star-half-o {
+    color: #323296;
+}

@@ -22,11 +22,9 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
             <div class="f1">
-
-
                 <div class="row"> 
                     <div class="col-xs-12 col-md-4">
-                        KORREKTES ERGEBNIS:
+                        {{ game.homeTeam.name }}
                     </div>
                     <div class="col-xs-12 col-md-1">
                         <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ game.homeTeamScore }}" disabled>
@@ -37,6 +35,7 @@
                     </div>     
                     <div class="col-xs-12 col-md-1"></div>
                     <div class="col-xs-12 col-md-4">
+                        {{ game.guestTeam.name }}
                     </div>
                 </div>
 
@@ -64,17 +63,17 @@
                             <div class="col-xs-12 col-md-1"></div>
                             <div class="col-xs-12 col-md-4">
                                 {% if(game.homeTeamScore is null) or (game.guestTeamScore is null) %}    
-                                    ???                                                                    
+                                    <i class="fa fa-question-circle-o" aria-hidden="true"></i>                                                                 
                                 {% elseif(bet.homeTeamScore == game.homeTeamScore) and (bet.guestTeamScore == game.guestTeamScore) %}
-                                    RICHTIG
+                                    <i class="fa fa-check" aria-hidden="true"></i>
                                 {% elseif(bet.homeTeamScore > bet.guestTeamScore) and (game.homeTeamScore > game.guestTeamScore) %}
-                                    TENDENZ                                    
+                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>                               
                                 {% elseif(bet.homeTeamScore < bet.guestTeamScore) and (game.homeTeamScore < game.guestTeamScore) %}
-                                    TENDENZ                                    
+                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
                                 {% elseif(bet.homeTeamScore == bet.guestTeamScore) and (game.homeTeamScore == game.guestTeamScore) %}
-                                    TENDENZ                                                                        
+                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>                           
                                 {% else %}
-                                    FALSCH
+                                    <i class="fa fa-times" aria-hidden="true"></i>
                                 {% endif %}
                             </div>
                         </div>

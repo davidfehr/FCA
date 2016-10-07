@@ -1,5 +1,10 @@
 {% for user in users %}
-    <p><a href="{{ path('userDetail', { 'userId': user.id })}}" data-user-name="{{ user.name }}">  {{ user.name }} </a></p>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">  
+            <p><a href="{{ path('userDetail', { 'userId': user.id })}}" data-user-name="{{ user.name }}">  {{ user.name }} </a></p>
+        </div>
+    </div>
+    <hr>
 {% endfor %} 
 
 

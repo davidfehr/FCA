@@ -21,11 +21,11 @@
                     </div>
                     <div class="col-xs-12 col-md-4">
                         {% if(answer.answer == answer.question.correctAnswer) %}
-                            RICHTIG
+                            <i class="fa fa-check" aria-hidden="true"></i>
                         {% elseif(answer.question.correctAnswer == null) %}
-                            ???
+                            <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                         {% else %}
-                            FALSCH
+                            <i class="fa fa-times" aria-hidden="true"></i>
                         {% endif %}                    
                     </div>
                 </div>
@@ -65,17 +65,17 @@
                     </div>        
                 </div>
                     {% if(bet.game.homeTeamScore == null) or (bet.game.guestTeamScore == null) %}    
-                        ???
+                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                     {% elseif(bet.homeTeamScore == bet.game.homeTeamScore) and (bet.guestTeamScore == bet.game.guestTeamScore) %}
-                        RICHTIG
+                        <i class="fa fa-check" aria-hidden="true"></i>
                     {% elseif(bet.homeTeamScore > bet.guestTeamScore) and (bet.game.homeTeamScore > bet.game.guestTeamScore) %}
-                        TENDENZ                                    
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>                                    
                     {% elseif(bet.homeTeamScore < bet.guestTeamScore) and (bet.game.homeTeamScore < bet.game.guestTeamScore) %}
-                        TENDENZ                                    
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>                                   
                     {% elseif(bet.homeTeamScore == bet.guestTeamScore) and (bet.game.homeTeamScore == bet.game.guestTeamScore) %}
-                        TENDENZ                            
+                       <i class="fa fa-star-half-o" aria-hidden="true"></i>                           
                     {% else %}
-                        FALSCH
+                        <i class="fa fa-times" aria-hidden="true"></i>
                     {% endif %}                    
                 <hr>
             {% endfor %}              

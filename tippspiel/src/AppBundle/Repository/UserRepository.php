@@ -20,7 +20,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function getAllPlayer() {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT u FROM AppBundle:User u WHERE u.complete=1'
+                'SELECT u FROM AppBundle:User u WHERE u.complete=1 ORDER BY u.points DESC'
             )
             ->getResult();         
     }

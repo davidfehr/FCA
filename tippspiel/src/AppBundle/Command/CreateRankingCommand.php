@@ -17,8 +17,6 @@ class CreateRankingCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Started');
-
         $em = $this->getContainer()->get('doctrine')->getManager();
         
         $userRepo = $em->getRepository('AppBundle:User');
@@ -40,12 +38,7 @@ class CreateRankingCommand extends ContainerAwareCommand
         foreach($answers as $answer) {
             if(!isset($usersArray[$answer->getUser()->getId()])) {
                 continue;
-            }
-            $output->writeln('Question : '. $answer->getQuestion()->getQuestion());
-            $output->writeln('Right    : '. $answer->getQuestion()->getCorrectAnswer());
-            $output->writeln('User     : '. $answer->getUser()->getName());
-            $output->writeln('Answer   : '. $answer->getAnswer());            
-            
+            }            
             $currentUserPoints = $usersArray[$answer->getUser()->getId()][1];            
             
             if($answer->getQuestion()->getCorrectAnswer() == $answer->getAnswer()) {
@@ -65,7 +58,6 @@ class CreateRankingCommand extends ContainerAwareCommand
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_ROUND') {                     
                     $currentUserPoints = $currentUserPoints + 5; //Platzierung Buli
                 } 
-                $output->writeln('CORRECT - adding full points for user '.$user->getName());
             } else {
                 if($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') {                     
                     // -1
@@ -77,7 +69,6 @@ class CreateRankingCommand extends ContainerAwareCommand
                 }
             }
             $usersArray[$answer->getUser()->getId()][1] = $currentUserPoints;
-            $output->writeln('===========');
         }        
         
         $gameRepo = $em->getRepository('AppBundle:Game');
@@ -90,36 +81,28 @@ class CreateRankingCommand extends ContainerAwareCommand
                 continue;
             }            
             
-            $output->writeln('User  : '. $bet->getUser()->getName());
-            $output->writeln('Game  : '. $bet->getGame()->getHomeTeamScore().' : '. $bet->getGame()->getGuestTeamScore()); 
-            $output->writeln('Answer: '. $bet->getHomeTeamScore().' : ' . $bet->getGuestTeamScore());
-            
             $currentUserPoints = $usersArray[$bet->getUser()->getId()][1];
             
             if($bet->getHomeTeamScore() == $bet->getGame()->getHomeTeamScore() && $bet->getGuestTeamScore() == $bet->getGame()->getGuestTeamScore()) {
                 $user = $bet->getUser();
-                $output->writeln('CORRECT - adding full points for user '.$user->getName());
+                
                 $currentUserPoints = $currentUserPoints + 5;
             } else if ($bet->getHomeTeamScore() == $bet->getGuestTeamScore() && $bet->getGame()->getHomeTeamScore() == $bet->getGame()->getGuestTeamScore()) {
-                $output->writeln('Tendenz für unentschieden');                
                 $currentUserPoints = $currentUserPoints + 2;
             } else if ($bet->getHomeTeamScore() > $bet->getGuestTeamScore() && $bet->getGame()->getHomeTeamScore() > $bet->getGame()->getGuestTeamScore()) {
-                $output->writeln('Tendenz für heimsieg');
                 $currentUserPoints = $currentUserPoints + 2;
             } else if ($bet->getHomeTeamScore() < $bet->getGuestTeamScore() && $bet->getGame()->getHomeTeamScore() < $bet->getGame()->getGuestTeamScore()) {
-                $output->writeln('Tendenz für auswärtssieg');
                 $currentUserPoints = $currentUserPoints + 2;
-            } else {
-                $output->writeln('INCORRECT');
             }
             $usersArray[$bet->getUser()->getId()][1] = $currentUserPoints;
-            $output->writeln('===========');
         }  
         
         foreach($usersArray as $singleArray) {
-            $output->writeln($singleArray[0]->getName() . ' has '. $singleArray[1] . ' Points');
+            $singleArray[0]->setPoints($singleArray[1]);
+            $em->persist($singleArray[0]);
         }
         
-        $output->writeln('Ended');
+        $em->flush();
+       
     }
 }
