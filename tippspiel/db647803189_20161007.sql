@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: db647803189.db.1and1.com
--- Erstellungszeit: 07. Okt 2016 um 22:35
+-- Erstellungszeit: 08. Okt 2016 um 00:27
 -- Server Version: 5.5.50-0+deb7u2-log
 -- PHP-Version: 5.4.45-0+deb7u5
 
@@ -1196,7 +1196,7 @@ INSERT INTO `answer` (`id`, `user_id`, `question_id`, `answer`) VALUES
 (1153, 32, 6, 'Man City'),
 (1154, 32, 7, 'PSG'),
 (1155, 32, 8, 'Norbert Meier'),
-(1156, 32, 9, 'TSV Geiselbullach'),
+(1156, 32, 9, 'Halbfinale'),
 (1157, 32, 10, 'Viertelfinale'),
 (1158, 32, 11, 'Achtelfinale'),
 (1159, 32, 12, 'Gruppenphase'),
