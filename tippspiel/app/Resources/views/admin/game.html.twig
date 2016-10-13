@@ -15,33 +15,30 @@
             <div class="f1">
                 <h4>"{{ game.homeTeam.name }} : {{ game.guestTeam.name }}"</h4>
                 <p style="font-size:10px;">Pflege das Ergebnis für dieses Spiel</p>
-                
-            <form role="form" action="{{ path('updateAdminGame') }}" method="post" class="f1">
-                <input type="hidden" name="gameId" id="inputGameId" value="{{ game.id|e }}">
-                
-                <div class="row">
-                    <div class="col-xs-12 col-md-4">
-                        <p>{{ game.hometeam.name|e }}<p>
-                    </div>
-                    <div class="col-xs-12 col-md-1">
-                        <input type="text" class="form-control" name="homeTeamScore" maxlength="2" id="disabledInput" placeholder="{{ game.homeTeamScore }}">
-                    </div>
-                    <div class="col-xs-12 col-md-1 text-center"> : </div>
-                    <div class="col-xs-12 col-md-1">
-                        <input type="text" class="form-control"  name="guestTeamScore" maxlength="2" id="disabledInput" placeholder="{{ game.guestTeamScore }}">                    
-                    </div>     
-                    <div class="col-xs-12 col-md-1"></div>
-                    <div class="col-xs-12 col-md-4">
-                        <p>{{ game.guestteam.name|e }} <p>
-                    </div>                            
-                </div>                
+                <form role="form" action="{{ path('updateAdminGame') }}" method="post" class="f1">
+                    <input type="hidden" name="gameId" id="inputGameId" value="{{ game.id|e }}">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <p>{{ game.hometeam.name|e }}<p>
+                        </div>
+                        <div class="col-xs-12 col-md-1">
+                            <input type="text" class="form-control" name="homeTeamScore" maxlength="2" id="disabledInput" placeholder="{{ game.homeTeamScore }}">
+                        </div>
+                        <div class="col-xs-12 col-md-1 text-center"> : </div>
+                        <div class="col-xs-12 col-md-1">
+                            <input type="text" class="form-control"  name="guestTeamScore" maxlength="2" id="disabledInput" placeholder="{{ game.guestTeamScore }}">                    
+                        </div>     
+                        <div class="col-xs-12 col-md-1"></div>
+                        <div class="col-xs-12 col-md-4">
+                            <p>{{ game.guestteam.name|e }} <p>
+                        </div>                            
+                    </div>                
                     <br>
-                <div class="f1-buttons">
-                    <button type="button" class="btn btn-previous">zurück</button>
-                    <button type="submit" name="submit" class="btn btn-submit">Ergebnis speichern</button>
-                </div>
-
-            </form>                
+                    <div class="f1-buttons">
+                        <a href="{{ path('admin') }}" class="btn btn-previous">zurück</a>
+                        <button type="submit" name="submit" class="btn btn-submit">Ergebnis speichern</button>
+                    </div>
+                </form>                
             </div>
         </div>
     </div>     

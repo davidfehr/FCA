@@ -26,6 +26,11 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-12">                    
                             <p><a href="{{ path('adminQuestion', { 'questionId': question.id })}}">  {{ question.question }} </a></p>
+                            {% if(question.correctAnswer is null) %}    
+                                <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                            {% elseif(question.correctAnswer is not null) %}    
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            {% endif %}                              
                         </div>
                     </div>
                     <hr>
