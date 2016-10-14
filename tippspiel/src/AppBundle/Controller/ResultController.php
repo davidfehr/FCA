@@ -235,10 +235,18 @@ class ResultController extends Controller {
         $betRepo = $this->getDoctrine()->getRepository('AppBundle:Bet');
         $bets = $betRepo->findBy(array('game' => $game));
 
-        return $this->render('result/gameDetail.html.twig', array(
-                    'game' => $game,
-                    'bets' => $bets
-        ));
+        if($request->query->get('table') == 'true') {
+            return $this->render('result/gameDetailTable.html.twig', array(
+                        'game' => $game,
+                        'bets' => $bets
+            ));            
+            
+        } else {
+            return $this->render('result/gameDetail.html.twig', array(
+                        'game' => $game,
+                        'bets' => $bets
+            ));
+        }
     }
 
     /**

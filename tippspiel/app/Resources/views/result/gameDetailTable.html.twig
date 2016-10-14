@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block custom_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+
+{% endblock %}            
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+            <div class="f1">
+                <h4>Hier sind die Tipps zu "{{ game.homeTeam.name }} : {{ game.guestTeam.name }}"</h4>
+                <p style="font-size:10px;">Man kann über den Usernamen alle Tipps des jeweiligen Tippers abrufen</p>
+            </div>
+        </div>
+    </div>  
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-4">
+                        {{ game.homeTeam.name }}
+                    </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ game.homeTeamScore }}" disabled>
+                    </div>
+                    <div class="col-xs-12 col-md-1 text-center"> : </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="{{ game.guestTeamScore }}" disabled>                    
+                    </div>     
+                    <div class="col-xs-12 col-md-1"></div>
+                    <div class="col-xs-12 col-md-4">
+                        {{ game.guestTeam.name }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>                 
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+                <table>
+                    <thead>
+                        <th>Tipper</th>
+                        <th> {{ game.homeTeam.name }}</th>
+                        <th> : </th>
+                        <th>{{ game.guestTeam.name }}</th>
+                    </thead>
+                    <tbody>
+                {% for bet in bets %}
+                    {% if(bet.user.complete == true) %}
+
+                        <tr>
+                             <td>{{ bet.user.name }}</td>
+                             <td>{{ bet.homeTeamScore }}</td>
+                             <th> : </th>
+                             <td>{{ bet.guestTeamScore }}</td>
+                        </tr>
+
+                    {% endif %}
+                {% endfor %}  
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>            
+
+{% endblock %}
+
+
