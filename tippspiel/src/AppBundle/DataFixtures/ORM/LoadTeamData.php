@@ -41,14 +41,14 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);
 
         $team = new Team();
-        $team->setName('FC Penzing');
-        $this->addReference('penzing', $team);
+        $team->setName('FC Emmering');
+        $this->addReference('emmering', $team);
         $team->setLeague($this->getReference('kreisliga'));
         $manager->persist($team);
 
         $team = new Team();
-        $team->setName('SV Eurasburg-Beuerberg');
-        $this->addReference('eurasburg', $team);
+        $team->setName('SV Igling');
+        $this->addReference('igling', $team);
         $team->setLeague($this->getReference('kreisliga'));
         $manager->persist($team);
 
@@ -59,20 +59,20 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);
 
         $team = new Team();
-        $team->setName('VSST Günzelhofen');
-        $this->addReference('günzelhofen', $team);
+        $team->setName('FT Jahn Landsberg');
+        $this->addReference('landsberg', $team);
         $team->setLeague($this->getReference('kreisliga'));
         $manager->persist($team);
 
         $team = new Team();
         $team->setName('SC Gröbenzell');
-        $this->addReference('gröbenzell', $team);
+        $this->addReference('groebenzell', $team);
         $team->setLeague($this->getReference('kreisliga'));
         $manager->persist($team);
 
         $team = new Team;
-        $team->setName('TSV FFB West');
-        $this->addReference('ffb_west', $team);
+        $team->setName('SC Pöcking Possenhofen');
+        $this->addReference('poecking', $team);
         $team->setLeague($this->getReference('kreisliga'));
         $manager->persist($team);
 
@@ -84,13 +84,13 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
 
         $team = new Team;
         $team->setName('SC Oberweikertshofen II');
-        $this->addReference('oberweikertshofen', $team);
+        $this->addReference('oberweikertshofenII', $team);
         $team->setLeague($this->getReference('kreisliga'));
         $manager->persist($team);
 
         $team = new Team;
-        $team->setName('TSV Bernbeuren');
-        $this->addReference('bernbeuren', $team);
+        $team->setName('SC Maisach');
+        $this->addReference('maisach', $team);
         $team->setLeague($this->getReference('kreisliga'));
         $manager->persist($team);
 
@@ -108,15 +108,15 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);          
         
         $team = new Team;
-        $team->setName('FC Penzing II');
+        $team->setName('SV Adelshofen Nassenhause');
         $team->setLeague($this->getReference('aklasse'));
-        $this->addReference('penzingII', $team);
-        $manager->persist($team);  
+        $this->addReference('adelshofen', $team);
+        $manager->persist($team); 
         
         $team = new Team;
         $team->setName('SV RW Überacker');
         $team->setLeague($this->getReference('aklasse'));
-        $this->addReference('überacker', $team);
+        $this->addReference('ueberacker', $team);
         $manager->persist($team); 
 
         $team = new Team;
@@ -128,13 +128,13 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $team = new Team;
         $team->setName('TSV Türkenfeld');
         $team->setLeague($this->getReference('aklasse'));
-        $this->addReference('türkenfeld', $team);
+        $this->addReference('tuerkenfeld', $team);
         $manager->persist($team); 
 
         $team = new Team;
         $team->setName('SC Schöngeising');
         $team->setLeague($this->getReference('aklasse'));
-        $this->addReference('schöngeising', $team);
+        $this->addReference('schoengeising', $team);
         $manager->persist($team); 
 
         $team = new Team;
@@ -162,16 +162,28 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team); 
 
         $team = new Team;
-        $team->setName('TSV Aufkirchen');
+        $team->setName('FC Landsberied');
         $team->setLeague($this->getReference('aklasse'));
-        $this->addReference('aufkirchen', $team);
+        $this->addReference('landsberied', $team);
         $manager->persist($team);
         
         $team = new Team;
-        $team->setName('SV Kottgeisering');
+        $team->setName('SC Oberweikertshofen III');
         $team->setLeague($this->getReference('aklasse'));
-        $this->addReference('kottgeisering', $team);
-        $manager->persist($team);        
+        $this->addReference('oberweikershofenIII', $team);
+        $manager->persist($team);  
+        
+        $team = new Team;
+        $team->setName('SpVgg Wildenroth');
+        $team->setLeague($this->getReference('aklasse'));
+        $this->addReference('wildenroth', $team);
+        $manager->persist($team);  
+        
+        $team = new Team;
+        $team->setName('SC Maisach II');
+        $team->setLeague($this->getReference('aklasse'));
+        $this->addReference('maisachII', $team);
+        $manager->persist($team);          
         
         //BUNDESLIGA
         $team = new Team;
@@ -205,15 +217,15 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);           
 
         $team = new Team;
-        $team->setName('FC Ingolstadt');
+        $team->setName('VfB Stuttgart');
         $team->setLeague($this->getReference('1.bundesliga'));
-        $this->addReference('ingolstadt', $team);
+        $this->addReference('stuttgart', $team);
         $manager->persist($team);           
         
         $team = new Team;
         $team->setName('Hertha BSC Berlin');
         $team->setLeague($this->getReference('1.bundesliga'));
-        $this->addReference('berlin', $team);
+        $this->addReference('hertha', $team);
         $manager->persist($team);           
         
         $team = new Team;
@@ -225,7 +237,7 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $team = new Team;
         $team->setName('1.FC Köln');
         $team->setLeague($this->getReference('1.bundesliga'));
-        $this->addReference('köln', $team);
+        $this->addReference('koeln', $team);
         $manager->persist($team);           
         
         $team = new Team;
@@ -265,9 +277,9 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);           
         
         $team = new Team;
-        $team->setName('SV Darmstadt 98');
+        $team->setName('Hannover 96');
         $team->setLeague($this->getReference('1.bundesliga'));
-        $this->addReference('darmstadt', $team);
+        $this->addReference('hannover', $team);
         $manager->persist($team);           
         
         $team = new Team;
@@ -284,9 +296,15 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         
         //2.Bundesliga
         $team = new Team;
-        $team->setName('Hannover 96');
+        $team->setName('Jahn Regensburg');
         $team->setLeague($this->getReference('2.bundesliga'));
-        $this->addReference('hannover', $team);
+        $this->addReference('regensburg', $team);
+        $manager->persist($team);          
+        
+        $team = new Team;
+        $team->setName('FC Ingolstadt');
+        $team->setLeague($this->getReference('2.bundesliga'));
+        $this->addReference('ingolstadt', $team);
         $manager->persist($team);        
         
         $team = new Team;
@@ -320,15 +338,15 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);        
         
         $team = new Team;
-        $team->setName('VfB Stuttgart');
+        $team->setName('Darmstadt 98');
         $team->setLeague($this->getReference('2.bundesliga'));
-        $this->addReference('stuttgart', $team);
+        $this->addReference('darmstadt', $team);
         $manager->persist($team);        
         
         $team = new Team;
-        $team->setName('TSV 1860 München');
+        $team->setName('MSV Duisburg');
         $team->setLeague($this->getReference('2.bundesliga'));
-        $this->addReference('münchen', $team);
+        $this->addReference('duisburg', $team);
         $manager->persist($team);        
         
         $team = new Team;
@@ -350,9 +368,9 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);        
         
         $team = new Team;
-        $team->setName('Karlsruher SC');
+        $team->setName('Holstein Kiel');
         $team->setLeague($this->getReference('2.bundesliga'));
-        $this->addReference('Karlsruhe', $team);
+        $this->addReference('kiel', $team);
         $manager->persist($team);        
         
         $team = new Team;
@@ -411,15 +429,15 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($team);       
 
         $team = new Team;
-        $team->setName('San Marino');
+        $team->setName('Spanien');
         $team->setLeague($this->getReference('nationalmannschaft'));
-        $this->addReference('sanmarino', $team);
+        $this->addReference('spanien', $team);
         $manager->persist($team);       
 
         $team = new Team;
-        $team->setName('Italien');
+        $team->setName('Brasilien');
         $team->setLeague($this->getReference('nationalmannschaft'));
-        $this->addReference('italien', $team);
+        $this->addReference('brasilien', $team);
         $manager->persist($team);       
 
         $team = new Team;
@@ -428,6 +446,11 @@ class LoadTeamData extends AbstractFixture implements OrderedFixtureInterface {
         $this->addReference('aserbaidschan', $team);
         $manager->persist($team);     
         
+        $team = new Team;
+        $team->setName('Norwegen');
+        $team->setLeague($this->getReference('nationalmannschaft'));
+        $this->addReference('norwegen', $team);
+        $manager->persist($team);         
         
         $manager->flush();        
     }

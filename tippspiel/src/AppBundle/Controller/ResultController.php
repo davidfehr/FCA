@@ -38,9 +38,35 @@ class ResultController extends Controller {
             }            
             $currentUserPoints = $usersArray[$answer->getUser()->getId()][1];            
             
+            //IF ANSWER CORRECT
             if($answer->getQuestion()->getCorrectAnswer() == $answer->getAnswer()) {
                 if($answer->getQuestion()->getType()->getName() == 'OPEN_QUESTION') {
-                    $currentUserPoints = $currentUserPoints + 5; //EU-Champion, goalgetter, etc
+                    
+                    //TODO Points for Pokalsieger wrong
+                    if($answer->getQuestion()->getId() == 1) { //Pokalsieger
+                        if($answer->getAnswer() == 'Borussia Dortmund') {
+                            $currentUserPoints = $currentUserPoints + 10;
+                        } else if($answer->getAnswer() == 'Eintracht Frankfurt') {
+                            $currentUserPoints = $currentUserPoints + 5;
+                        } else if(in_array($answer->getAnswer(), array('Bayern München', 'Gladbach'))) {
+                            $currentUserPoints = $currentUserPoints + 2;
+                        }
+                        
+                    } elseif($answer->getQuestion()->getId() == 2) { //Championsleague
+                        if($answer->getAnswer() == 'Real Madrid') {
+                            $currentUserPoints = $currentUserPoints + 10;
+                        } else if($answer->getAnswer() == 'Juventus Turin') {
+                            $currentUserPoints = $currentUserPoints + 5;
+                        } else if(in_array($answer->getAnswer(), array('AS Monaco', 'Atletico Madrid'))) {
+                            $currentUserPoints = $currentUserPoints + 2;
+                        }                        
+                    } elseif(in_array($answer->getQuestion()->getId(), array(3, 18, 22))) { //Championsleague
+                        $currentUserPoints = $currentUserPoints + 10;
+                    } else {
+                        $currentUserPoints = $currentUserPoints + 5; //EU-Champion, goalgetter, etc
+                    }
+                    
+                    
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION') {
                     $currentUserPoints = $currentUserPoints + 5; //Coach
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_TEAM_KREISLIGA') {
@@ -50,14 +76,15 @@ class ResultController extends Controller {
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') {                     
                     $currentUserPoints = $currentUserPoints + 5; //Platzierung Aich
                 } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI' ||
-                        $answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI2') {                     
+                    $answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI2') {                     
                     $currentUserPoints = $currentUserPoints + 6; //Platzierung Buli
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_ROUND') {                     
-                    $currentUserPoints = $currentUserPoints + 5; //Platzierung Buli
+                    $currentUserPoints = $currentUserPoints + 5; //Wie weit im Europapokal
                 } 
+            //IF ANSWER is FALSE
             } elseif($answer->getQuestion()->getCorrectAnswer() != null) {
                 $correction = 0;
-                if($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') {                     
+                if($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') { //Platzierung                     
                     $correction = 5 - abs($answer->getQuestion()->getCorrectAnswer() - $answer->getAnswer());
                 } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI') {
                     $type = $typeRepo->findOneByName('PLACEMENT_BULI');
@@ -72,15 +99,15 @@ class ResultController extends Controller {
                     $type = $typeRepo->findOneByName('PLACEMENT_BULI2');
                     $questions = $questionRepo->getRankedTeams($type);
                     foreach($questions as $question) {
-                        if($question->getCorrectAnswer() == $answer->getAnswer()) {    
+                        if($question->getCorrectAnswer() == $answer->getAnswer() && (abs($question->getCorrectAnswer() - $answer->getAnswer()) < 6)) {    
                             $correction = 3;
                             break;
                         }
                     }                    
                 } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_ROUND') {                     
-                    $round1 = $roundRepo->findOneByName($answer->getAnswer());
-                    $round2 = $roundRepo->findOneByName($answer->getQuestion()->getCorrectAnswer());
-                    $correction = (5 - (abs($round1->getId() - $round2->getId())*2));
+                    $betRound = $roundRepo->findOneByName($answer->getAnswer());
+                    $correctRound = $roundRepo->findOneByName($answer->getQuestion()->getCorrectAnswer());
+                    $correction = (5 - (abs($betRound->getId() - $correctRound->getId())*2));
                 }
                 $currentUserPoints = $currentUserPoints + $correction;
             }
@@ -99,14 +126,17 @@ class ResultController extends Controller {
             
             $currentUserPoints = $usersArray[$bet->getUser()->getId()][1];
             
+            //Genau richtig
             if($bet->getHomeTeamScore() == $bet->getGame()->getHomeTeamScore() && $bet->getGuestTeamScore() == $bet->getGame()->getGuestTeamScore()) {
                 $user = $bet->getUser();
-                
                 $currentUserPoints = $currentUserPoints + 5;
+            //Tendenz Unentschieden
             } else if ($bet->getHomeTeamScore() == $bet->getGuestTeamScore() && $bet->getGame()->getHomeTeamScore() == $bet->getGame()->getGuestTeamScore()) {
                 $currentUserPoints = $currentUserPoints + 2;
+            //Tendenz Heimsieg    
             } else if ($bet->getHomeTeamScore() > $bet->getGuestTeamScore() && $bet->getGame()->getHomeTeamScore() > $bet->getGame()->getGuestTeamScore()) {
                 $currentUserPoints = $currentUserPoints + 2;
+            //Tendenz Auswärtssieg
             } else if ($bet->getHomeTeamScore() < $bet->getGuestTeamScore() && $bet->getGame()->getHomeTeamScore() < $bet->getGame()->getGuestTeamScore()) {
                 $currentUserPoints = $currentUserPoints + 2;
             }
@@ -129,8 +159,33 @@ class ResultController extends Controller {
         $userRepo = $this->getDoctrine()->getRepository('AppBundle:User');
         $users = $userRepo->getAllPlayer();
         
+        $ranking = array();
+        
+        $previousPlayer = null;
+        $currentPlacement = 1;
+        $nextPlacement = 1;
+        foreach($users as $user) {
+            if($previousPlayer == null) {
+                $ranking[$currentPlacement] = array();
+                array_push($ranking[$currentPlacement], $user);
+            } else {
+                if($user->getPoints() == $previousPlayer->getPoints()) {
+                    array_push($ranking[$currentPlacement], $user);
+                    
+                } else {
+                    $currentPlacement = $nextPlacement;
+                    $ranking[$currentPlacement] = array();
+                    array_push($ranking[$currentPlacement], $user);
+                }
+            }
+            $nextPlacement++;
+            $previousPlayer = $user;
+        }
+        
+        
         return $this->render('result/ranking.html.twig', array(
-            'users' => $users
+            'users' => $users,
+            'ranking' => $ranking
         ));
     }
 
@@ -216,11 +271,29 @@ class ResultController extends Controller {
 
         $betRepository = $this->getDoctrine()->getRepository('AppBundle:Bet');
         $bets = $betRepository->findBy(array('user' => $user));
+        
+        
+        $questionRepo = $this->getDoctrine()->getRepository('AppBundle:Question');
+        $typeRepo = $this->getDoctrine()->getRepository('AppBundle:QuestionType');
+        $teamsInSlot = array();
+        
+        $typeBuli1 = $typeRepo->findOneByName('PLACEMENT_BULI');
+        $typeBuli2 = $typeRepo->findOneByName('PLACEMENT_BULI2');
 
+        $questions = $questionRepo->getRankedTeams($typeBuli1);
+        foreach($questions as $question) {
+            array_push($teamsInSlot, $question->getCorrectAnswer());
+        }
+        $questions = $questionRepo->getRankedTeams($typeBuli2);
+        foreach($questions as $question) {
+            array_push($teamsInSlot, $question->getCorrectAnswer());
+        }                     
+        
         return $this->render('result/userDetail.html.twig', array(
                     'user' => $user,
                     'answers' => $answers,
-                    'bets' => $bets
+                    'bets' => $bets,
+                    'teamsInSlot' => $teamsInSlot
         ));
     }
 

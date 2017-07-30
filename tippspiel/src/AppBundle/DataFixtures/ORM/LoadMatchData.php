@@ -19,244 +19,265 @@ class LoadMatchData extends AbstractFixture implements OrderedFixtureInterface {
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('penzing'));
-        $game->setMatchDate(new \DateTime('2016-09-10'));
+        $game->setGuestTeam($this->getReference('geiselbullach'));
+        $game->setMatchDate(new \DateTime('2017-08-26'));
+        $game->setLeague($this->getReference('kreisliga'));
+        $manager->persist($game);        
+        
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aich'));
+        $game->setGuestTeam($this->getReference('igling'));
+        $game->setMatchDate(new \DateTime('2017-09-09'));
         $game->setLeague($this->getReference('kreisliga'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('unterpfaffenhofen'));
-        $game->setMatchDate(new \DateTime('2016-09-21'));
-        $game->setLeague($this->getReference('kreisliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('eurasburg'));
-        $game->setMatchDate(new \DateTime('2016-10-08'));
-        $game->setLeague($this->getReference('kreisliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('peiting'));
-        $game->setMatchDate(new \DateTime('2016-10-15'));
-        $game->setLeague($this->getReference('kreisliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('mammendorf'));
-        $game->setMatchDate(new \DateTime('2016-11-05'));
-        $game->setLeague($this->getReference('kreisliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('oberweikertshofen'));
-        $game->setMatchDate(new \DateTime('2016-03-25'));
-        $game->setLeague($this->getReference('kreisliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('gröbenzell'));
-        $game->setMatchDate(new \DateTime('2017-04-01'));
+        $game->setGuestTeam($this->getReference('oberweikertshofenII'));
+        $game->setMatchDate(new \DateTime('2017-10-03'));
         $game->setLeague($this->getReference('kreisliga'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aich'));
         $game->setGuestTeam($this->getReference('denklingen'));
-        $game->setMatchDate(new \DateTime('2017-04-15'));
+        $game->setMatchDate(new \DateTime('2017-10-11'));
         $game->setLeague($this->getReference('kreisliga'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('bernbeuren'));
-        $game->setMatchDate(new \DateTime('2017-04-29'));
+        $game->setGuestTeam($this->getReference('altenstadt'));
+        $game->setMatchDate(new \DateTime('2017-10-14'));
         $game->setLeague($this->getReference('kreisliga'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('geiselbullach'));
-        $game->setMatchDate(new \DateTime('2017-05-13'));
+        $game->setGuestTeam($this->getReference('poecking'));
+        $game->setMatchDate(new \DateTime('2017-10-19'));
         $game->setLeague($this->getReference('kreisliga'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('ffb_west'));
-        $game->setMatchDate(new \DateTime('2017-06-03'));
+        $game->setGuestTeam($this->getReference('peiting'));
+        $game->setMatchDate(new \DateTime('2017-10-28'));
         $game->setLeague($this->getReference('kreisliga'));
         $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aich'));
+        $game->setGuestTeam($this->getReference('mammendorf'));
+        $game->setMatchDate(new \DateTime('2017-11-04'));
+        $game->setLeague($this->getReference('kreisliga'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aich'));
+        $game->setGuestTeam($this->getReference('unterpfaffenhofen'));
+        $game->setMatchDate(new \DateTime('2018-04-07'));
+        $game->setLeague($this->getReference('kreisliga'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aich'));
+        $game->setGuestTeam($this->getReference('maisach'));
+        $game->setMatchDate(new \DateTime('2018-04-21'));
+        $game->setLeague($this->getReference('kreisliga'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aich'));
+        $game->setGuestTeam($this->getReference('landsberg'));
+        $game->setMatchDate(new \DateTime('2018-05-15'));
+        $game->setLeague($this->getReference('kreisliga'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aich'));
+        $game->setGuestTeam($this->getReference('emmering'));
+        $game->setMatchDate(new \DateTime('2018-05-12'));
+        $game->setLeague($this->getReference('kreisliga'));
+        $manager->persist($game);
+        
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aich'));
+        $game->setGuestTeam($this->getReference('groebenzell'));
+        $game->setMatchDate(new \DateTime('2018-05-27'));
+        $game->setLeague($this->getReference('kreisliga'));
+        $manager->persist($game);        
 
         //A-KLASSE
         $game = new Game();
         $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('penzingII'));
-        $game->setMatchDate(new \DateTime('2016-09-10'));
+        $game->setGuestTeam($this->getReference('ueberacker'));
+        $game->setMatchDate(new \DateTime('2017-08-26'));
         $game->setLeague($this->getReference('aklasse'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('türkenfeld'));
-        $game->setMatchDate(new \DateTime('2016-09-24'));
-        $game->setLeague($this->getReference('aklasse'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('schöngeising'));
-        $game->setMatchDate(new \DateTime('2016-08-10'));
+        $game->setGuestTeam($this->getReference('wildenroth'));
+        $game->setMatchDate(new \DateTime('2017-09-09'));
         $game->setLeague($this->getReference('aklasse'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aichII'));
         $game->setGuestTeam($this->getReference('geltendorf'));
-        $game->setMatchDate(new \DateTime('2016-10-15'));
+        $game->setMatchDate(new \DateTime('2017-09-23'));
         $game->setLeague($this->getReference('aklasse'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('mammendorfII'));
-        $game->setMatchDate(new \DateTime('2016-11-05'));
-        $game->setLeague($this->getReference('aklasse'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('malching'));
-        $game->setMatchDate(new \DateTime('2017-03-25'));
+        $game->setGuestTeam($this->getReference('oberweikershofenIII'));
+        $game->setMatchDate(new \DateTime('2017-10-03'));
         $game->setLeague($this->getReference('aklasse'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aichII'));
         $game->setGuestTeam($this->getReference('jesenwang'));
-        $game->setMatchDate(new \DateTime('2016-04-01'));
+        $game->setMatchDate(new \DateTime('2017-10-14'));
+        $game->setLeague($this->getReference('aklasse'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aichII'));
+        $game->setGuestTeam($this->getReference('landsberied'));
+        $game->setMatchDate(new \DateTime('2017-10-28'));
+        $game->setLeague($this->getReference('aklasse'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aichII'));
+        $game->setGuestTeam($this->getReference('mammendorfII'));
+        $game->setMatchDate(new \DateTime('2017-11-04'));
+        $game->setLeague($this->getReference('aklasse'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aichII'));
+        $game->setGuestTeam($this->getReference('tuerkenfeld'));
+        $game->setMatchDate(new \DateTime('2018-04-07'));
+        $game->setLeague($this->getReference('aklasse'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aichII'));
+        $game->setGuestTeam($this->getReference('maisachII'));
+        $game->setMatchDate(new \DateTime('2018-04-21'));
+        $game->setLeague($this->getReference('aklasse'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aichII'));
+        $game->setGuestTeam($this->getReference('schoengeising'));
+        $game->setMatchDate(new \DateTime('2017-05-05'));
+        $game->setLeague($this->getReference('aklasse'));
+        $manager->persist($game);
+        
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('aichII'));
+        $game->setGuestTeam($this->getReference('malching'));
+        $game->setMatchDate(new \DateTime('2017-04-21'));
         $game->setLeague($this->getReference('aklasse'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('aichII'));
         $game->setGuestTeam($this->getReference('haspelmoor'));
-        $game->setMatchDate(new \DateTime('2017-04-29'));
+        $game->setMatchDate(new \DateTime('2017-05-26'));
         $game->setLeague($this->getReference('aklasse'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('aufkirchen'));
-        $game->setMatchDate(new \DateTime('2017-05-13'));
-        $game->setLeague($this->getReference('aklasse'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('überacker'));
-        $game->setMatchDate(new \DateTime('2017-06-03'));
-        $game->setLeague($this->getReference('aklasse'));
-        $manager->persist($game);
+        $manager->persist($game);        
 
         //NATIONALMANNSCHAFT
         $game = new Game();
+        $game->setHomeTeam($this->getReference('tschechische'));
+        $game->setGuestTeam($this->getReference('deutschland'));
+        $game->setMatchDate(new \DateTime('2017-09-01'));
+        $game->setLeague($this->getReference('nationalmannschaft'));
+        $manager->persist($game);
+
+        $game = new Game();
         $game->setHomeTeam($this->getReference('deutschland'));
-        $game->setGuestTeam($this->getReference('tschechische'));
-        $game->setMatchDate(new \DateTime('2016-10-08'));
+        $game->setGuestTeam($this->getReference('norwegen'));
+        $game->setMatchDate(new \DateTime('2017-09-04'));
+        $game->setLeague($this->getReference('nationalmannschaft'));
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('nordirland'));
+        $game->setGuestTeam($this->getReference('deutschland'));
+        $game->setMatchDate(new \DateTime('2017-10-05'));
         $game->setLeague($this->getReference('nationalmannschaft'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('deutschland'));
-        $game->setGuestTeam($this->getReference('nordirland'));
-        $game->setMatchDate(new \DateTime('2016-10-11'));
+        $game->setGuestTeam($this->getReference('aserbaidschan'));
+        $game->setMatchDate(new \DateTime('2017-11-08'));
         $game->setLeague($this->getReference('nationalmannschaft'));
         $manager->persist($game);
 
         $game = new Game();
-        $game->setHomeTeam($this->getReference('sanmarino'));
-        $game->setGuestTeam($this->getReference('deutschland'));
-        $game->setMatchDate(new \DateTime('2016-11-13'));
+        $game->setHomeTeam($this->getReference('deutschland'));
+        $game->setGuestTeam($this->getReference('spanien'));
+        $game->setMatchDate(new \DateTime('2018-03-23'));
         $game->setLeague($this->getReference('nationalmannschaft'));
         $manager->persist($game);
-
+        
         $game = new Game();
-        $game->setHomeTeam($this->getReference('italien'));
-        $game->setGuestTeam($this->getReference('deutschland'));
-        $game->setMatchDate(new \DateTime('2016-11-15'));
+        $game->setHomeTeam($this->getReference('deutschland'));
+        $game->setGuestTeam($this->getReference('brasilien'));
+        $game->setMatchDate(new \DateTime('2018-03-27'));
         $game->setLeague($this->getReference('nationalmannschaft'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aserbaidschan'));
-        $game->setGuestTeam($this->getReference('deutschland'));
-        $game->setMatchDate(new \DateTime('2017-03-26'));
-        $game->setLeague($this->getReference('nationalmannschaft'));
-        $manager->persist($game);
+        $manager->persist($game);        
 
 //        //BUNDESLIGA
         $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('ingolstadt'));
-        $game->setMatchDay(3);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('berlin'));
-        $game->setMatchDay(4);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('hamburg'));
+        $game->setHomeTeam($this->getReference('bremen'));
         $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(5);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('köln'));
-        $game->setMatchDay(6);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('frankfurt'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(7);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('gladbach'));
-        $game->setMatchDay(8);
+        $game->setMatchDay(2);
         $game->setLeague($this->getReference('1.bundesliga'));
         $manager->persist($game);
 
         $game = new Game();
-        $game->setHomeTeam($this->getReference('augsburg'));
+        $game->setHomeTeam($this->getReference('hoffenheim'));
         $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(9);
+        $game->setMatchDay(3);
         $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);
+        $manager->persist($game);        
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('hoffenheim'));
+        $game->setGuestTeam($this->getReference('wolfsburg'));
+        $game->setMatchDay(6);
+        $game->setLeague($this->getReference('1.bundesliga'));
+        $manager->persist($game);        
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('hertha'));
+        $game->setGuestTeam($this->getReference('bayern'));
+        $game->setMatchDay(7);
+        $game->setLeague($this->getReference('1.bundesliga'));
+        $manager->persist($game);        
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('freiburg'));
+        $game->setGuestTeam($this->getReference('bayern'));
+        $game->setMatchDay(8);
+        $game->setLeague($this->getReference('1.bundesliga'));
+        $manager->persist($game);        
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('bayern'));
+        $game->setGuestTeam($this->getReference('leipzig'));
         $game->setMatchDay(10);
         $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
+        $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('dortmund'));
@@ -266,224 +287,54 @@ class LoadMatchData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($game);
 
         $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('leverkusen'));
-        $game->setMatchDay(12);
-        $game->setLeague($this->getReference('1.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('mainz'));
+        $game->setHomeTeam($this->getReference('gladbach'));
         $game->setGuestTeam($this->getReference('bayern'));
         $game->setMatchDay(13);
         $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('wolfsburg'));
-        $game->setMatchDay(14);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('darmstadt'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(15);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('leipzig'));
-        $game->setMatchDay(16);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('freiburg'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(17);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bremen'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(18);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('schalke'));
-        $game->setMatchDay(19);
-        $game->setLeague($this->getReference('1.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('berlin'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(20);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('hamburg'));
-        $game->setMatchDay(21);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('ingolstadt'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(22);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('köln'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(23);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('frankfurt'));
-        $game->setMatchDay(24);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('gladbach'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(25);
-        $game->setLeague($this->getReference('1.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('augsburg'));
-        $game->setMatchDay(26);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('hoffenheim'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(27);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('dortmund'));
-        $game->setMatchDay(28);
-        $game->setLeague($this->getReference('1.bundesliga'));
-        $manager->persist($game);
+        $manager->persist($game);        
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('leverkusen'));
         $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(29);
+        $game->setMatchDay(18);
         $game->setLeague($this->getReference('1.bundesliga'));
         $manager->persist($game);
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('mainz'));
-        $game->setMatchDay(30);
+        $game->setGuestTeam($this->getReference('schalke'));
+        $game->setMatchDay(22);
         $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
+        $manager->persist($game);
 
         $game = new Game();
-        $game->setHomeTeam($this->getReference('wolfsburg'));
+        $game->setHomeTeam($this->getReference('augsburg'));
+        $game->setGuestTeam($this->getReference('bayern'));
+        $game->setMatchDay(29);
+        $game->setLeague($this->getReference('1.bundesliga'));
+        $manager->persist($game);        
+
+        $game = new Game();
+        $game->setHomeTeam($this->getReference('hannover'));
         $game->setGuestTeam($this->getReference('bayern'));
         $game->setMatchDay(31);
         $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
+        $manager->persist($game);
 
         $game = new Game();
-        $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('darmstadt'));
-        $game->setMatchDay(32);
-        $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('leipzig'));
+        $game->setHomeTeam($this->getReference('koeln'));
         $game->setGuestTeam($this->getReference('bayern'));
         $game->setMatchDay(33);
         $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);        
+        $manager->persist($game);        
 
         $game = new Game();
         $game->setHomeTeam($this->getReference('bayern'));
-        $game->setGuestTeam($this->getReference('freiburg'));
+        $game->setGuestTeam($this->getReference('stuttgart'));
         $game->setMatchDay(34);
         $game->setLeague($this->getReference('1.bundesliga'));
-//        $manager->persist($game);  
-//        
-//                    
-        //2.BUNDESLIGA        
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('nürnberg'));
-        $game->setGuestTeam($this->getReference('münchen'));
-        $game->setMatchDay(4);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        $manager->persist($game);
+        $manager->persist($game);        
 
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('pauli'));
-        $game->setGuestTeam($this->getReference('münchen'));
-        $game->setMatchDay(6);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('münchen'));
-        $game->setGuestTeam($this->getReference('stuttgart'));
-        $game->setMatchDay(10);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('münchen'));
-        $game->setGuestTeam($this->getReference('dresden'));
-        $game->setMatchDay(15);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        //$manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('münchen'));
-        $game->setGuestTeam($this->getReference('nürnberg'));
-        $game->setMatchDay(21);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('münchen'));
-        $game->setGuestTeam($this->getReference('pauli'));
-        $game->setMatchDay(23);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('stuttgart'));
-        $game->setGuestTeam($this->getReference('münchen'));
-        $game->setMatchDay(27);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('dresden'));
-        $game->setGuestTeam($this->getReference('münchen'));
-        $game->setMatchDay(32);
-        $game->setLeague($this->getReference('2.bundesliga'));
-        //$manager->persist($game);
 
         $manager->flush();
     }

@@ -33,13 +33,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for key,rank in ranking %}
+                                {% for user in rank %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td style="text-align: left;"><a href="{{ path('userDetail', { 'userId': user.id }) }}">{{ user.name }}</a></td>
+                                        <td>{{ user.points }}</td>                                    
+                                    </tr>
+                                {% endfor %}                                       
+                                
+                            {% endfor %}    
+                            
+                            <!--   
                             {% for user in users %}
-                                <tr>
+                             <tr>
                                     <td>{{ loop.index }}</td>
                                     <td style="text-align: left;"><a href="{{ path('userDetail', { 'userId': user.id }) }}">{{ user.name }}</a></td>
                                     <td>{{ user.points }}</td>
                                 </tr>
                             {% endfor %}    
+                             -->
                         </tbody>
                     </table>
                 </div>                

@@ -23,12 +23,12 @@ class LoadPossibleAnswerData extends AbstractFixture implements OrderedFixtureIn
         $manager->persist($answer);
 
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Thomas Tuchel');
+        $answer->setAnswer('Peter Bosz');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);
         
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Roger Schmidt');
+        $answer->setAnswer('Heiko Herrlich');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);        
         
@@ -53,7 +53,7 @@ class LoadPossibleAnswerData extends AbstractFixture implements OrderedFixtureIn
         $manager->persist($answer);   
 
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Andre Schubert');
+        $answer->setAnswer('Dieter Hecking');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer); 
         
@@ -73,22 +73,22 @@ class LoadPossibleAnswerData extends AbstractFixture implements OrderedFixtureIn
         $manager->persist($answer);
         
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Bruno Labbadia');
+        $answer->setAnswer('Markus Gisdol');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);           
         
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Viktor Skripnik');
+        $answer->setAnswer('Alexander Nouri');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);        
         
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Dirk Schuster');
+        $answer->setAnswer('Hannes Wolf');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);      
 
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Norbert Meier');
+        $answer->setAnswer('Andre Breitenreiter');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);      
         
@@ -98,12 +98,12 @@ class LoadPossibleAnswerData extends AbstractFixture implements OrderedFixtureIn
         $manager->persist($answer);         
         
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Dieter Hecking');
+        $answer->setAnswer('Andries Jonker');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);       
         
         $answer = new PossibleAnswer();
-        $answer->setAnswer('Markus Kauczinski');
+        $answer->setAnswer('Manuel Baum');
         $answer->setQuestion($this->getReference('buli_trainer'));
         $manager->persist($answer);   
 
