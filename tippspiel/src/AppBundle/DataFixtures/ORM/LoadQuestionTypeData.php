@@ -60,7 +60,12 @@ class LoadQuestionTypeData extends AbstractFixture implements OrderedFixtureInte
         $type = new QuestionType();
         $type->setName('PLACEMENT_BULI2');
         $this->setReference('placement_buli2', $type);
-        $manager->persist($type);          
+        $manager->persist($type);  
+
+        $type = new QuestionType();
+        $type->setName('CUP');
+        $this->setReference('cup', $type);
+        $manager->persist($type);         
         
         $manager->flush();
     }

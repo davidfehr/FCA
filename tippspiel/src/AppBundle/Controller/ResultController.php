@@ -38,55 +38,50 @@ class ResultController extends Controller {
             }            
             $currentUserPoints = $usersArray[$answer->getUser()->getId()][1];            
             
+            $questionTypeName = $answer->getQuestion()->getType()->getName();
+            $correctAnswer = $answer->getQuestion()->getCorrectAnswer();
+            $arrayTest = explode(",", $correctAnswer);
+            
             //IF ANSWER CORRECT
-            if($answer->getQuestion()->getCorrectAnswer() == $answer->getAnswer()) {
-                if($answer->getQuestion()->getType()->getName() == 'OPEN_QUESTION') {
+            if($correctAnswer == $answer->getAnswer()
+                    || in_array($answer->getAnswer(), explode(",", $correctAnswer))) {
+                if($questionTypeName == 'OPEN_QUESTION') {
+                    $currentUserPoints = $currentUserPoints + 5;
+                } elseif($questionTypeName == 'CUP') {
                     
-                    //TODO Points for Pokalsieger wrong
-                    if($answer->getQuestion()->getId() == 1) { //Pokalsieger
-                        if($answer->getAnswer() == 'Borussia Dortmund') {
-                            $currentUserPoints = $currentUserPoints + 10;
-                        } else if($answer->getAnswer() == 'Eintracht Frankfurt') {
-                            $currentUserPoints = $currentUserPoints + 5;
-                        } else if(in_array($answer->getAnswer(), array('Bayern München', 'Gladbach'))) {
-                            $currentUserPoints = $currentUserPoints + 2;
-                        }
-                        
-                    } elseif($answer->getQuestion()->getId() == 2) { //Championsleague
-                        if($answer->getAnswer() == 'Real Madrid') {
-                            $currentUserPoints = $currentUserPoints + 10;
-                        } else if($answer->getAnswer() == 'Juventus Turin') {
-                            $currentUserPoints = $currentUserPoints + 5;
-                        } else if(in_array($answer->getAnswer(), array('AS Monaco', 'Atletico Madrid'))) {
-                            $currentUserPoints = $currentUserPoints + 2;
-                        }                        
-                    } elseif(in_array($answer->getQuestion()->getId(), array(3, 18, 22))) { //Championsleague
+                    $answerArray = explode(",", $correctAnswer);
+                    $winner = trim($answerArray[0]);
+                    $second = trim($answerArray[1]);
+                    $semifinals1 = trim($answerArray[2]);
+                    $semifinals2 = trim($answerArray[3]);
+                    
+                    if($answer->getAnswer() == $winner) {
                         $currentUserPoints = $currentUserPoints + 10;
-                    } else {
-                        $currentUserPoints = $currentUserPoints + 5; //EU-Champion, goalgetter, etc
-                    }
-                    
-                    
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION') {
+                    } else if($answer->getAnswer() == $second) {
+                        $currentUserPoints = $currentUserPoints + 5;
+                    } else if(in_array($answer->getAnswer(), array($semifinals1, $semifinals2))) {
+                        $currentUserPoints = $currentUserPoints + 2;
+                    }      
+                } elseif($questionTypeName == 'SELECTION') {
                     $currentUserPoints = $currentUserPoints + 5; //Coach
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_TEAM_KREISLIGA') {
+                } elseif($questionTypeName == 'SELECTION_TEAM_KREISLIGA') {
                     $currentUserPoints = $currentUserPoints + 10; //Champion Kreisliga
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_TEAM_AKLASSE') {                    
+                } elseif($questionTypeName == 'SELECTION_TEAM_AKLASSE') {                    
                     $currentUserPoints = $currentUserPoints + 10; //Champion Kreisliga
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') {                     
+                } elseif($questionTypeName == 'SELECTION_COUNT') {                     
                     $currentUserPoints = $currentUserPoints + 5; //Platzierung Aich
-                } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI' ||
-                    $answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI2') {                     
+                } elseif($questionTypeName == 'PLACEMENT_BULI' ||
+                    $questionTypeName == 'PLACEMENT_BULI2') {                     
                     $currentUserPoints = $currentUserPoints + 6; //Platzierung Buli
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_ROUND') {                     
+                } elseif($questionTypeName == 'SELECTION_ROUND') {                     
                     $currentUserPoints = $currentUserPoints + 5; //Wie weit im Europapokal
                 } 
             //IF ANSWER is FALSE
-            } elseif($answer->getQuestion()->getCorrectAnswer() != null) {
+            } elseif($correctAnswer != null) {
                 $correction = 0;
-                if($answer->getQuestion()->getType()->getName() == 'SELECTION_COUNT') { //Platzierung                     
-                    $correction = 5 - abs($answer->getQuestion()->getCorrectAnswer() - $answer->getAnswer());
-                } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI') {
+                if($questionTypeName == 'SELECTION_COUNT') { //Platzierung                     
+                    $correction = 5 - abs($correctAnswer - $answer->getAnswer());
+                } elseif($questionTypeName == 'PLACEMENT_BULI') {
                     $type = $typeRepo->findOneByName('PLACEMENT_BULI');
                     $questions = $questionRepo->getRankedTeams($type);
                     foreach($questions as $question) {
@@ -95,7 +90,7 @@ class ResultController extends Controller {
                             break;
                         }
                     }
-                } elseif($answer->getQuestion()->getType()->getName() == 'PLACEMENT_BULI2') {
+                } elseif($questionTypeName == 'PLACEMENT_BULI2') {
                     $type = $typeRepo->findOneByName('PLACEMENT_BULI2');
                     $questions = $questionRepo->getRankedTeams($type);
                     foreach($questions as $question) {
@@ -104,9 +99,9 @@ class ResultController extends Controller {
                             break;
                         }
                     }                    
-                } elseif($answer->getQuestion()->getType()->getName() == 'SELECTION_ROUND') {                     
+                } elseif($questionTypeName == 'SELECTION_ROUND') {                     
                     $betRound = $roundRepo->findOneByName($answer->getAnswer());
-                    $correctRound = $roundRepo->findOneByName($answer->getQuestion()->getCorrectAnswer());
+                    $correctRound = $roundRepo->findOneByName($correctAnswer);
                     $correction = (5 - (abs($betRound->getId() - $correctRound->getId())*2));
                 }
                 $currentUserPoints = $currentUserPoints + $correction;
