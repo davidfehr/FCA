@@ -16,13 +16,6 @@ use AppBundle\Entity\Game;
 class LoadMatchData extends AbstractFixture implements OrderedFixtureInterface {
 
     public function load(ObjectManager $manager) {
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aich'));
-        $game->setGuestTeam($this->getReference('geiselbullach'));
-        $game->setMatchDate(new \DateTime('2017-08-26'));
-        $game->setLeague($this->getReference('kreisliga'));
-        $manager->persist($game);        
         
         $game = new Game();
         $game->setHomeTeam($this->getReference('aich'));
@@ -111,13 +104,6 @@ class LoadMatchData extends AbstractFixture implements OrderedFixtureInterface {
         //A-KLASSE
         $game = new Game();
         $game->setHomeTeam($this->getReference('aichII'));
-        $game->setGuestTeam($this->getReference('ueberacker'));
-        $game->setMatchDate(new \DateTime('2017-08-26'));
-        $game->setLeague($this->getReference('aklasse'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('aichII'));
         $game->setGuestTeam($this->getReference('wildenroth'));
         $game->setMatchDate(new \DateTime('2017-09-09'));
         $game->setLeague($this->getReference('aklasse'));
@@ -195,20 +181,6 @@ class LoadMatchData extends AbstractFixture implements OrderedFixtureInterface {
 
         //NATIONALMANNSCHAFT
         $game = new Game();
-        $game->setHomeTeam($this->getReference('tschechische'));
-        $game->setGuestTeam($this->getReference('deutschland'));
-        $game->setMatchDate(new \DateTime('2017-09-01'));
-        $game->setLeague($this->getReference('nationalmannschaft'));
-        $manager->persist($game);
-
-        $game = new Game();
-        $game->setHomeTeam($this->getReference('deutschland'));
-        $game->setGuestTeam($this->getReference('norwegen'));
-        $game->setMatchDate(new \DateTime('2017-09-04'));
-        $game->setLeague($this->getReference('nationalmannschaft'));
-        $manager->persist($game);
-
-        $game = new Game();
         $game->setHomeTeam($this->getReference('nordirland'));
         $game->setGuestTeam($this->getReference('deutschland'));
         $game->setMatchDate(new \DateTime('2017-10-05'));
@@ -238,13 +210,6 @@ class LoadMatchData extends AbstractFixture implements OrderedFixtureInterface {
 
 //        //BUNDESLIGA
         $game = new Game();
-        $game->setHomeTeam($this->getReference('bremen'));
-        $game->setGuestTeam($this->getReference('bayern'));
-        $game->setMatchDay(2);
-        $game->setLeague($this->getReference('1.bundesliga'));
-        $manager->persist($game);
-
-        $game = new Game();
         $game->setHomeTeam($this->getReference('hoffenheim'));
         $game->setGuestTeam($this->getReference('bayern'));
         $game->setMatchDay(3);
@@ -266,8 +231,8 @@ class LoadMatchData extends AbstractFixture implements OrderedFixtureInterface {
         $manager->persist($game);        
 
         $game = new Game();
-        $game->setHomeTeam($this->getReference('freiburg'));
-        $game->setGuestTeam($this->getReference('bayern'));
+        $game->setHomeTeam($this->getReference('bayern'));
+        $game->setGuestTeam($this->getReference('freiburg'));
         $game->setMatchDay(8);
         $game->setLeague($this->getReference('1.bundesliga'));
         $manager->persist($game);        

@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: localhost
+    database_port: null
+    database_name: tippspiel
+    database_user: fca
+    database_password: fca
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 6e9336b69592eaa3e53c902f9d5a12e2f81107e5

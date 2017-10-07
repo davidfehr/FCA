@@ -74,7 +74,7 @@ class LoadQuestionData extends AbstractFixture implements OrderedFixtureInterfac
         $manager->persist($question); 
 
         $question = new Question();
-        $question->setQuestion('Wie weit kommt Hoffenheim in der CL?');
+        $question->setQuestion('Wie weit kommt Hoffenheim in der EL?');
         $question->setType($this->getReference('select_round'));        
         $manager->persist($question);         
         

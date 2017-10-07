@@ -12,7 +12,22 @@
             <link rel="stylesheet" href="{{ asset('css/form-elements.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
         {% endblock %}
-        <script src="https://use.fontawesome.com/0ea24bcc31.js"></script>
+        
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>            
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>            
+            <script src="https://use.fontawesome.com/0ea24bcc31.js"></script>
+            <script type="text/javascript" src="{{ asset('js/main.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/scripts.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/placeholder.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/placeholder.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/placeholder.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/retina-1.1.0.js') }}" ></script>            
+            <script type="text/javascript" src="{{ asset('js/jquery.backstretch.js') }}" ></script>
+        {% endblock %}
+
+        {% block custom_javascript %}{% endblock %}        
+        
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -63,18 +78,6 @@
         </div><!-- /.container -->     
     </div>
 
-    {% block javascripts %}
-        <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>            
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>            
-        <script type="text/javascript" src="{{ asset('js/main.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/scripts.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/placeholder.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/placeholder.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/placeholder.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/retina-1.1.0.js') }}" ></script>            
-        <script type="text/javascript" src="{{ asset('js/jquery.backstretch.js') }}" ></script>
-    {% endblock %}
-    
-    {% block custom_javascript %}{% endblock %}
+
 </body>
 </html>

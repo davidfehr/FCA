@@ -1,10 +1,61 @@
 {% extends 'base.html.twig' %}
 
 {% block custom_javascript %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
+    <script type="text/javascript" src="{{ asset('js/Chart.PieceLabel.min.js') }}"></script>
+            
     <script type="text/javascript">
         $(document).ready(function () {
+            var randomScalingFactor = function () {
+                return Math.round(Math.random() * 100);
+            };
 
+            var config = {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                            data: [
+                                betApp.betWin,
+                                betApp.betDraw,
+                                betApp.betLose
+                            ],
+                            backgroundColor: [
+                                'rgb(50, 50, 150)',
+                                'rgb(136, 136, 136)',
+                                'rgb(255, 0, 0)'
+                            ],
+                            label: 'Dataset 1'
+                        }],
+                    labels: [
+                        "Sieg FC Aich ("+betApp.betWin+")",
+                        "Unentschieden ("+betApp.betDraw+")",
+                        "Niederlage FC Aich ("+betApp.betLose+")"
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    showTooltips: false,
+                    cutoutPercentage: 0,
+                    pieceLabel: {
+                        render: 'percentage',
+                        fontColor: '#fff',
+                        fontSize: 18,
+                        arc: false,
+                        position: 'default'
+                    }
+                }
+            };
+
+            $('#betterHomeScore').attr('placeholder', (betApp.betHomeScore/betApp.bets).toFixed(2));
+            $('#betterGuestScore').attr('placeholder', (betApp.betAwayScore/betApp.bets).toFixed(2));            
+            
+            var canvas = document.getElementById("myChart");
+            var ctx = canvas.getContext("2d");           
+            
+            window.myPie = new Chart(ctx, config);
         });
+        
+
     </script>
 
 {% endblock %}            
@@ -48,6 +99,21 @@
             <div class="f1">
                 {% for bet in bets %}
                     {% if(bet.user.complete == true) %}
+                        
+                        <script type="text/javascript">
+                            
+                            if({{ bet.homeTeamScore }} > {{ bet.guestTeamScore }}) {
+                                betApp.betWin = betApp.betWin + 1;
+                            } else if ({{ bet.homeTeamScore }} == {{ bet.guestTeamScore }}) {
+                                betApp.betDraw = betApp.betDraw + 1;    
+                            } else {
+                                betApp.betLose = betApp.betLose + 1;
+                            };
+                            
+                            betApp.betHomeScore = betApp.betHomeScore + {{ bet.homeTeamScore }};
+                            betApp.betAwayScore = betApp.betAwayScore + {{ bet.guestTeamScore }};
+                            betApp.bets = betApp.bets + 1;
+                        </script>
 
                         <div class="row"> 
                             <div class="col-xs-12 col-md-4">
@@ -83,7 +149,39 @@
                 {% endfor %}               
             </div>
         </div>
-    </div>            
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+            
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box" >        
+            <div class="f1">
+                <h4>Die Tipper haben ingesamt folgendes Ergebnis getippt:</h4>
+                <div class="row"> 
+                    <div class="col-xs-12 col-md-4">
+                        {{ game.homeTeam.name }}
+                    </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input id="betterHomeScore" type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="0" disabled>
+                    </div>
+                    <div class="col-xs-12 col-md-1 text-center"> : </div>
+                    <div class="col-xs-12 col-md-1">
+                        <input id="betterGuestScore" type="text" class="form-control" maxlength="2" id="disabledInput" placeholder="0" disabled>                    
+                    </div>     
+                    <div class="col-xs-12 col-md-1"></div>
+                    <div class="col-xs-12 col-md-4">
+                        {{ game.guestTeam.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>               
 
 {% endblock %}
 

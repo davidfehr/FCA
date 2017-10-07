@@ -15,7 +15,7 @@ class DefaultController extends Controller {
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request) {
-        return $this->redirectToRoute('user');
+        return $this->redirectToRoute('ranking');
     }
     
     /**
